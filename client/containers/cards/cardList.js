@@ -6,13 +6,11 @@ class CardList extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col l3" />
-        <div className="col l6 s12">
+        <div className="col l9 offset-l1 s12">
           <ul>
             <Card />
           </ul>
         </div>
-        <div className="col l3" />
       </div>
     );
   }

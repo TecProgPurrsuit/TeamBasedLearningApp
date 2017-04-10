@@ -6,15 +6,15 @@
 */
 
 import React from 'react';
-import { Route } from 'react-router';
-
+import { Route, IndexRoute } from 'react-router';
+import App from './components/app.js';
 import QuestionList from './containers/questionList';
 import GroupAnswering from './containers/groupAnswering';
 import IndividualAnswering from './containers/individualAnswering';
 
 export default (
-  <Route>
-    <Route path="/" component={QuestionList} />
+  <Route path="/" component={App}>
+    <IndexRoute component={QuestionList} />
     <Route path="/group-simulator" component={GroupAnswering} />
     <Route path="/individual-simulator" component={IndividualAnswering} />
   </Route>

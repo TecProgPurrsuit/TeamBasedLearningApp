@@ -1,10 +1,10 @@
 sudo: required
 language: node_js
 node_js:
-  - "7"
+  - "6.10.0"
 
 before_script:
-  - "curl https://install.meteor.com | /bin/sh"  
+  - "curl https://install.meteor.com | /bin/sh"
 script:
   - "meteor add dispatch:mocha"
   - "meteor test --once --driver-package dispatch:mocha"
