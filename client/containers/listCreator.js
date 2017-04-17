@@ -10,6 +10,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Lists from '../../lib/collections/listsCollection';
 
 class ListCreator extends Component {
   constructor(props) {
