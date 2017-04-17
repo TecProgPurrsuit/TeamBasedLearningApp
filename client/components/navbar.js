@@ -23,6 +23,9 @@ class NavBar extends Component {
             <li onClick={this.props.selectIndividualAnswering}>
               <Link to="/individual-simulator">Prova individual</Link>
             </li>
+            <li onClick={this.props.selectIndividualAnswering}>
+              <Link to="/available-questions">Listas disponíveis</Link>
+            </li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
             <li><AccountsUI /></li>

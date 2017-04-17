@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 class AvailableCard extends Component {
 
   renderAvailableQuestions() {
-    const questions = this.props.questionList;
-    var available_questions = [];
-    const isLoggedIn = this.props.questionList[0].answered;
+    const questions = this.props.questionListData;
 
+    var available_questions = [];
     available_questions = filterAvailableQuestions(questions);
 
     return available_questions.map((question) => {
@@ -74,7 +73,7 @@ class AvailableCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    questionList: state.questionList,
+    questionListData: state.questionListData,
   };
 }
 
@@ -91,7 +90,7 @@ function filterAvailableQuestions (allQuestions) {
 }
 
 AvailableCard.propTypes = {
-  questionList: React.PropTypes.array.isRequired,
+  questionListData: React.PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps)(AvailableCard);
