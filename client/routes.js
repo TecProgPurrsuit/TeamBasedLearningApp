@@ -13,6 +13,8 @@ import GroupAnswer from './containers/groupAnswer';
 import IndividualAnswer from './containers/individualAnswer';
 import AvailableQuestions from './containers/availableQuestions';
 import ListCreator from './containers/listCreator';
+import Login from './components/auth/login';
+import Register from './components/auth/register';
 
 export default (
   <Route path="/" component={App}>
@@ -20,5 +22,7 @@ export default (
     <Route path="/individual-simulator" component={IndividualAnswer} />
     <Route path="/available-questions" component={AvailableQuestions} />
     <Route path="/create-list" component={ListCreator} />
+    <Route path="/login" component={Login} />
+    <Route path="/register" component={Register} />
   </Route>
 );
