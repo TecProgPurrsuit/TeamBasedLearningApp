@@ -16,7 +16,7 @@ import reducers from './reducers';
 import { Meteor } from 'meteor/meteor';
 
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const CREATESTOREWITHMIDDLEWARE = applyMiddleware()(createStore);
 
 
 Meteor.startup(() => {
@@ -24,7 +24,7 @@ Meteor.startup(() => {
   Meteor.subscribe('Lists');
 
   render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={CREATESTOREWITHMIDDLEWARE(reducers)}>
       <Router history={browserHistory} routes={routes} />
     </Provider>
     , document.getElementById('container'));
