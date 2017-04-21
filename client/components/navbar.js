@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import cookie from 'react-cookie';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import AccountsUI from './accountsUI';
 import { selectGroupAnswering, selectIndividualAnswering } from '../actions/index';
 import Logout from './auth/logout';
-import cookie from 'react-cookie';
 
 class NavBar extends Component {
 
@@ -20,6 +19,13 @@ class NavBar extends Component {
   }
 
   render() {
+    if(this.isAuthenticated()) {
+      welcome = 'Bem vindo ' + this.currentUser.profile.name;
+      authentication = <Logout />
+    } else {
+      welcome = '';
+      authentication = <li><Link to="/login">Login</Link></li>
+    }
     return (
       <div>
       <nav className="teal darken-4">
@@ -41,10 +47,7 @@ class NavBar extends Component {
             <li onClick={this.props.selectIndividualAnswering}>
               <Link to="/available-questions">Listas disponíveis</Link>
             </li>
-            { !this.isAuthenticated() ?
-                <li><Link to="/login">Login</Link></li>
-              : <Logout />
-            }
+            { authentication }
           </ul>
           <ul className="side-nav" id="mobile-demo">
             <li><Link to="/group-simulator">Prova em grupo</Link></li>
@@ -53,7 +56,7 @@ class NavBar extends Component {
         </div>
       </nav>
       <div className="left white-text">
-        { this.isAuthenticated() ? 'Bem vindo ' + this.currentUser.profile.name : '' }
+        { welcome }
       </div>
       </div>
     );

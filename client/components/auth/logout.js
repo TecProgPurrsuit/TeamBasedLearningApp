@@ -1,29 +1,23 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router'
+import React, { Component } from 'react';
 import cookie from 'react-cookie';
+import { Link } from 'react-router'
 
 class Logout extends Component {
 
-  constructor(props) {
-    super(props)
-    this.logout = this.logout.bind(this)
-  }
-
-  logout(event) {
-    event.preventDefault()
-    Meteor.logout( (err) => {
-      if(err) {
-        console.log(err.reason);
-      } else {
+  logout() {
+    Meteor.logout((error) => {
+      if(!error) {
         cookie.remove('user', {path: '/'})
-        window.location.reload();
+        // window.location.reload();
+      } else {
+        console.log(error.reason);
       }
     });
   }
 
   render() {
     return(
-      <li onClick={this.logout}>
+      <li onClick={this.logout.bind(this)}>
         <Link to="/login">Logout</Link>
       </li>
     );

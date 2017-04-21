@@ -57,6 +57,8 @@
 .register {
   margin-top: 10px;
   color: white;
+  text-align: center;
+  display: block !important;
 }
 
 .register:hover {

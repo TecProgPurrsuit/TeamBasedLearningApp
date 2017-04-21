@@ -1,63 +1,71 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
+import CustomInput from '../customInput';
+import CustomButton from '../customButton';
+import CustomError from '../customError';
 import './authentication.css';
 
 class Register extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {error: ''};
-    this.handleSubmit = this.handleSubmit.bind(this);
+  constructor() {
+    super();
+    this.state = {
+      error: '',
+      registration_number: '',
+      password: '',
+      email: '',
+      name: '',
+      group: '',
+      name_of_class: '',
+      classes: [],
+      groups: [],
+    };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    let registration_number = document.getElementById('signup-registration_number').value;
-    let password = document.getElementById('signup-password').value;
-    let email = document.getElementById('signup-email').value;
-    let name = document.getElementById('signup-name').value;
-    let group = document.getElementById('signup-group').value;
-    let name_of_class = document.getElementById('signup-class').value;
-    this.setState({error: ''});
     let user = {
-      username: registration_number,
-      password: password,
+      username: this.state.registration_number,
+      password: this.state.password,
       profile: {
-        name: name,
-        email: email,
-        group: group,
-        name_of_class: name_of_class,
+        name: this.state.name,
+        email: this.state.email,
+        group: this.state.group,
+        name_of_class: this.state.name_of_class,
         is_teacher: false
       }
-    }
-    Meteor.call('userInsert', user)
+    };
+    Meteor.call('userInsert', user);
+    browserHistory.push('/login');
+  }
+
+  handleInput(input, event) {
+    let changedField = {};
+    changedField[input] = event.target.value;
+    this.setState(changedField);
   }
 
   render() {
-    const error = this.state.error;
     return (
       <div className="register-form">
         <h1>Cadastro</h1>
-        <div className="error">
-          { error.length > 0 ?
-            <div className="card-panel red lighten-3">{error}</div>
-            : ''
-          }
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name="name"
+        <CustomError
+          className="card-panel red lighten-3"
+          error={this.state.error} />
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <CustomInput
+            onChange={this.handleInput.bind(this, 'name')}
+            value={this.state.name}
             type="text"
-            id="signup-name"
             className="input-field white-text"
             placeholder="Nome"
             autoComplete="off"
             required
-            autoFocus /><br />
-          <input
-            id="signup-group"
+            autoFocus />
+          <CustomInput
+            onChange={this.handleInput.bind(this, 'group')}
+            value={this.state.group}
             list="groups"
-            name="group"
             className="white-text"
             pattern="(Grupo [0-9]+)"
             title="Escolha uma das alternativas"
@@ -70,46 +78,47 @@ class Register extends Component {
               <option value="Grupo 04" />
               <option value="Grupo 05" />
             </datalist>
-          <input
-            id="signup-class"
+          <CustomInput
+            onChange={this.handleInput.bind(this, 'name_of_class')}
+            value={this.state.name_of_class}
             list="classes"
-            name="class"
             className="white-text"
             placeholder="Disciplinas" />
             <datalist id="classes">
               <option value="Medição e Análise" />
               <option value="Requisitos" />
             </datalist>
-          <input
-            name="username"
+          <CustomInput
+            onChange={this.handleInput.bind(this, 'registration_number')}
+            value={this.state.registration_number}
             type="text"
-            id="signup-registration_number"
             className="input-field white-text"
             placeholder="Matrícula"
             autoComplete="off"
             pattern="[0-9]{9}"
             title="Matricula da UnB - 9 digitos"
-            required /><br />
-          <input
-            name="email"
+            required />
+          <CustomInput
+            onChange={this.handleInput.bind(this, 'email')}
+            value={this.state.email}
             type="email"
-            id="signup-email"
             className="input-field white-text validate"
             placeholder="Email"
             autoComplete="off"
-            required /><br />
-          <input
-            name="password"
+            required />
+          <CustomInput
+            onChange={this.handleInput.bind(this, 'password')}
+            value={this.state.password}
             type="password"
-            id="signup-password"
             className="input-field white-text"
             placeholder="Senha"
             autoComplete="off"
             required />
-          <button type="submit" className="waves-effect waves-light btn teal darken-4 button-center">
-            <i className="material-icons left">send</i>
-            Registrar
-          </button>
+          <CustomButton
+            type="submit"
+            className="waves-effect waves-light btn teal darken-4 button-center"
+            icon="send"
+            title="Registrar" />
         </form>
       </div>
     );
