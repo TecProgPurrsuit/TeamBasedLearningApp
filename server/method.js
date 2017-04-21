@@ -1,6 +1,23 @@
-Accounts.onCreateUser((options, user) => {
+Meteor.methods({
+  'userInsert': (user) => {
+    check(user, {
+      username: String,
+      password: String,
+      profile: {
+        name: String,
+        email: String,
+        group: String,
+        name_of_class: String,
+        is_teacher: Boolean
+      }
+    });
 
-  user.profile['name'] = options.name
+    const userExists = Accounts.findUserByUsername(user.username);
 
-  return user
-});
+    if(!userExists) {
+      return Accounts.createUser(user);
+    } else {
+      console.log("Usuário já existe!")
+    }
+  },
+})
