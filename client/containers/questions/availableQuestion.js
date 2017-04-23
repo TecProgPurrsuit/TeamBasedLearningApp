@@ -11,19 +11,16 @@ class AvailableQuestion extends Component {
 
     return available_questions.map((question) => {
       return (
-        <div className="card"key={question.description}>
+        <div className="card available-card-container"key={question.description}>
           <div className="card-content available-card">
             <span className="card-title grey-text text-darken-4">
               {question.title}
-              <i className="material-icons right">
-                more_vert
-              </i>
             </span>
             <div className="card-stacked">
               <div className="card-content available-card">
                 <p>{question.description}</p>
               </div>
-              <div>
+              <div className="available-card-button">
                 {this.checkIfAnswered(question) }
               </div>
             </div>
@@ -86,6 +83,19 @@ class AvailableQuestion extends Component {
     return <this.unansweredQuestion />;
   }
 
+  renderAnswer(templet){
+    return templet.map((question) => {
+      return (
+        <a href="#" className="collection-item">
+          <span className="badge">
+            {question.alternativePoints}
+          </span>
+          {question.alternativeDescription}
+        </a>
+      );
+    });
+  }
+
   renderTempletCardTabs(questionList){
     return questionList.map((question) => {
       return (
@@ -100,9 +110,13 @@ class AvailableQuestion extends Component {
 
   renderTempletTabContent(questionList){
     return questionList.map((question) => {
+      console.log(question.alternatives);
       return (
         <div key={question.id} id={question.id}>
           {question.description}
+          <div className="collection">
+            {this.renderAnswer(question.alternatives)}
+          </div>
         </div>
       );
     });

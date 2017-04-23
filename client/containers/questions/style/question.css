@@ -4,6 +4,14 @@
 .available-card {
   background-color: #fff;
 }
+.available-card-container{
+  height: 425px;
+}
+.available-card-button{
+  position: absolute;
+  right:    0;
+  bottom:   0;
+}
 .card-action {
   background-color: #e0e0e0;
 }
