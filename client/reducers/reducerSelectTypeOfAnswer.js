@@ -1,3 +1,9 @@
+/**
+* This file is responsible for update the state after the type of answering be selected by the user.
+*
+* @summary Reducer for update state with the type of answering.
+*/
+
 import { SELECT_GROUP_ANSWERING, SELECT_INDIVIDUAL_ANSWERING } from '../actions/index';
 
 export default function (state = 'EMPTY', action) {
