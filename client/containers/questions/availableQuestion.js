@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class AvailableCard extends Component {
+class AvailableQuestion extends Component {
 
   renderAvailableQuestions() {
     const questions = this.props.questionListData;
@@ -89,8 +89,8 @@ function filterAvailableQuestions (allQuestions) {
   return available_questions;
 }
 
-AvailableCard.propTypes = {
+AvailableQuestion.propTypes = {
   questionListData: React.PropTypes.array.isRequired,
 };
 
-export default connect(mapStateToProps)(AvailableCard);
+export default connect(mapStateToProps)(AvailableQuestion);
