@@ -6,8 +6,53 @@
 }
 .card-action {
   background-color: #e0e0e0;
+  width: 100%;
 }
 
 .card-action:hover {
   background-color: #eeeee4;
+}
+
+.button-submit {
+	background-color:#6fba26;
+	padding:10px 50px;
+  display: inline-block;
+  margin: 0 auto;
+	font-family: 'Open Sans', sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	color:#fff;
+	background-image: linear-gradient(bottom, rgb(100,170,30) 0%, rgb(129,212,51) 100%);
+	box-shadow: inset 0px 1px 0px #b2f17f, 0px 6px 0px #3d6f0d;
+	border-radius: 5px;
+}
+
+.button-submit:active {
+	top:7px;
+	background-image: linear-gradient(bottom, rgb(100,170,30) 100%, rgb(129,212,51) 0%);
+	box-shadow: inset 0px 1px 0px #b2f17f, inset 0px -1px 0px #3d6f0d;
+	color: #156785;
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
+	background: rgb(44,160,202);
+}
+
+.button-submit::before {
+	background-color:#072239;
+	content:"";
+	display:block;
+	position:absolute;
+	width:100%;
+	height:100%;
+	padding-left:2px;
+	padding-right:2px;
+	padding-bottom:4px;
+	left:-2px;
+	top:5px;
+	z-index:-1;
+	border-radius: 6px;
+	box-shadow: 0px 1px 0px #fff;
+}
+
+.button-submit:active::before {
+	top:-2px;
 }

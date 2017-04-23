@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import GroupAlternative from './groupAlternative';
 
 require('./style/question.css');
 
@@ -8,7 +9,7 @@ class QuestionAlternatives extends Component {
     super(props);
     this.renderQuestionAlternative = this.renderQuestionAlternative.bind(this);
     this.renderGroupAlternatives = this.renderGroupAlternatives.bind(this);
-    this.groupListener = this.groupListener.bind(this);
+    this.state = { alternativeStyle: { } };
   }
   renderQuestionAlternative(questionAlternatives) {
     if (this.props.typeOfAnswering === 'GA') {
@@ -22,22 +23,17 @@ class QuestionAlternatives extends Component {
     }
   }
 
-  groupListener(alternative){
-    if (alternative.alternativePoints !== 0) {
-      console.log("Resposta correta!");
-    } else {
-      console.log("Resposta errada!");
-    }
+  clearAlternativeStyle() {
+    this.setState({ alternativeStyle: false });
   }
 
   renderGroupAlternatives(questionAlternatives) {
     return questionAlternatives.map((alternative) => {
       return (
-        <div className="card-action" key={alternative.alternativeDescription} >
-          <a onClick={() => this.groupListener(alternative)} className="collection-item black-text">
-            {alternative.alternativeDescription}
-          </a>
-        </div>
+        <GroupAlternative
+          alternative={alternative}
+          key={alternative.alternativeDescription}
+        />
       );
     });
   }
@@ -59,6 +55,7 @@ function mapStateToProps(state) {
 
 QuestionAlternatives.propTypes = {
   questionAlternatives: React.PropTypes.array.isRequired,
+  typeOfAnswering: React.PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(QuestionAlternatives);
