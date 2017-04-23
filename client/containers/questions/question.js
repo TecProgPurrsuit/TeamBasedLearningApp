@@ -1,3 +1,11 @@
+/**
+* This file is responsible for rendering the questions for the user.
+*
+* @summary Component for show the questions of a list.
+*
+* @class Question
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionAlternatives from './questionAlternatives';
