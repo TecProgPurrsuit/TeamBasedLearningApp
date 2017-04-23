@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Lists from '../../lib/collections/listsCollection';
+import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
 
 class ListCreator extends Component {
@@ -38,8 +38,7 @@ class ListCreator extends Component {
     /** If the data in state does not match with the List Schema, it will raise
     *   an error.
     */
-    
-    Lists.insert(this.state, (error, result) => {
+    LISTSDB.insert(this.state, (error, result) => {
       alert('Verifique se todos os campos foram preenchidos corretamente' +
         ', por favor.');
     });

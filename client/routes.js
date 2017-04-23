@@ -12,7 +12,7 @@ import QuestionList from './containers/questions/questionList';
 import GroupAnswer from './containers/groupAnswer';
 import IndividualAnswer from './containers/individualAnswer';
 import AvailableQuestions from './containers/availableQuestions';
-import ListCreator from './containers/listCreator';
+import ListCreator from './containers/creators/listCreator';
 
 export default (
   <Route path="/" component={App}>
