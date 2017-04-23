@@ -1,3 +1,11 @@
+/**
+* This file is responsible for render the questions' alternatives.
+*
+* @summary Component for questions' alternatives.
+
+  @class QuestionAlternatives
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GroupAlternative from './groupAlternative';
@@ -11,14 +19,15 @@ class QuestionAlternatives extends Component {
     this.renderGroupAlternatives = this.renderGroupAlternatives.bind(this);
     this.state = { alternativeStyle: { } };
   }
+
   renderQuestionAlternative(questionAlternatives) {
-    if (this.props.typeOfAnswering === 'GA') {
+    if (this.props.typeOfAnswering === 'GroupAnswering') {
       return (
         <div>
           {this.renderGroupAlternatives(questionAlternatives)}
         </div>
       );
-    } else if (this.props.typeOfAnswering === 'IA') {
+    } else if (this.props.typeOfAnswering === 'IndividualAnswering') {
       // QuestionAlternatives.renderIndividualAlternatives(questionAlternatives);
     }
   }

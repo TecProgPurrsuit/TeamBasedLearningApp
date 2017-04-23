@@ -8,6 +8,7 @@ const questionList = [{
       questions: [
         {
           description: 'De acordo com o modelo de requisitos do SAFe, um item de backlog pode ser, EXCETO:',
+          id: "q1-1",
           alternatives: [
             {
               alternativeDescription: 'Épico',
@@ -33,6 +34,7 @@ const questionList = [{
         },
         {
           description: 'Sobre o nível de Portifólio, é INCORRETO afirmar:',
+          id: "q1-2",
           alternatives: [
             {
               alternativeDescription: 'Os épicos do portifolio são elementos que permitem entender como os ARTs são gerenciados no SAFe.',
@@ -68,6 +70,7 @@ const questionList = [{
       questions: [
         {
           description: 'De acordo com o modelo de requisitos do SAFe, um item de backlog pode ser, EXCETO:',
+          id: "q2-1",
           alternatives: [
             {
               alternativeDescription: 'Épico',
@@ -93,6 +96,7 @@ const questionList = [{
         },
         {
           description: 'Sobre o nível de Portifólio, é INCORRETO afirmar:',
+          id: "q2-2",
           alternatives: [
             {
               alternativeDescription: 'Os épicos do portifolio são elementos que permitem entender como os ARTs são gerenciados no SAFe.',
