@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import AvailableCard from './availableCard';
+import AvailableQuestion from './availableQuestion';
 
 
-class AvailableCardList extends Component {
+class AvailableQuestionList extends Component {
   render() {
     return (
       <div className="row">
         <div className="col l3" />
         <div className="col l6 s12">
           <ul>
-            <AvailableCard />
+            <AvailableQuestion />
           </ul>
         </div>
         <div className="col l3" />
@@ -18,4 +18,4 @@ class AvailableCardList extends Component {
   }
 }
 
-export default AvailableCardList;
+export default AvailableQuestionList;

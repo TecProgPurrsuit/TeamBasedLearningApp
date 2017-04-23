@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AvailableCardList from './cards/availableCardList';
+import AvailableQuestionList from './questions/availableQuestionList';
 
 class AvailableQuestions extends Component {
 
   render() {
     return (
-      <AvailableCardList />
+      <AvailableQuestionList />
     );
   }
 }
