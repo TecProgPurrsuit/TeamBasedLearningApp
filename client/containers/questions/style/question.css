@@ -1,7 +1,9 @@
 .card-content {
   background-color: #696969;
 }
-
+.available-card {
+  background-color: #fff;
+}
 .card-action {
   background-color: #e0e0e0;
 }

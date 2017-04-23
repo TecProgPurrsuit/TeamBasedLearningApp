@@ -11,20 +11,36 @@ class AvailableQuestion extends Component {
 
     return available_questions.map((question) => {
       return (
-        <div className="col s12 m7"key={question.description}>
-          <h2 className="header">{question.title}</h2>
-          <div className="card horizontal">
+        <div className="card"key={question.description}>
+          <div className="card-content available-card">
+            <span className="card-title grey-text text-darken-4">
+              {question.title}
+              <i className="material-icons right">
+                more_vert
+              </i>
+            </span>
             <div className="card-stacked">
-              <div className="card-content">
+              <div className="card-content available-card">
                 <p>{question.description}</p>
               </div>
               <div>
                 {this.checkIfAnswered(question) }
               </div>
-              <answeredQuestion />
             </div>
           </div>
+          <div className="card-reveal">
+            <span className="card-title grey-text text-darken-4"><i className="material-icons right">close</i></span>
+              <div className="card-tabs">
+                <ul className="tabs tabs-fixed-width">
+                  {this.renderTempletCardTabs(question.questions)}
+                </ul>
+              </div>
+              <div className="card-content grey lighten-4">
+                {this.renderTempletTabContent(question.questions)}
+              </div>
+          </div>
         </div>
+
       );
     });
   }
@@ -48,7 +64,7 @@ class AvailableQuestion extends Component {
   answeredQuestion(props) {
     return(
       <div className="card-action">
-        <a href="#">Ver respostas certas</a>
+        <a className="activator">Ver respostas certas</a>
       </div>
     );
   }
@@ -56,7 +72,7 @@ class AvailableQuestion extends Component {
   unansweredQuestion(props) {
     return(
       <div className="card-action">
-        <a href="#">Responder Questionário</a>
+        <a>Responder Questionário</a>
       </div>
     );
   }
@@ -68,6 +84,28 @@ class AvailableQuestion extends Component {
       // nothing to do
     }
     return <this.unansweredQuestion />;
+  }
+
+  renderTempletCardTabs(questionList){
+    return questionList.map((question) => {
+      return (
+        <div key={question.id}>
+          <li className="tab">
+            <a href={"#"+question.id} className="active">{"Questão: "+ question.id}</a>
+          </li>
+        </div>
+      );
+    });
+  }
+
+  renderTempletTabContent(questionList){
+    return questionList.map((question) => {
+      return (
+        <div key={question.id} id={question.id}>
+          {question.description}
+        </div>
+      );
+    });
   }
 }
 
