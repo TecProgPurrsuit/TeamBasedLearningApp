@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GroupAlternative from './groupAlternative';
+import IndividualAlternative from './individualAlternative';
 
 require('./style/question.css');
 
@@ -28,7 +29,11 @@ class QuestionAlternatives extends Component {
         </div>
       );
     } else if (this.props.typeOfAnswering === 'IndividualAnswering') {
-      // QuestionAlternatives.renderIndividualAlternatives(questionAlternatives);
+      return (
+        <div>
+          {this.renderIndividualAlternatives(questionAlternatives)}
+        </div>
+      );
     }
   }
 
@@ -40,6 +45,17 @@ class QuestionAlternatives extends Component {
     return questionAlternatives.map((alternative) => {
       return (
         <GroupAlternative
+          alternative={alternative}
+          key={alternative.alternativeDescription}
+        />
+      );
+    });
+  }
+
+  renderIndividualAlternatives(questionAlternatives) {
+    return questionAlternatives.map((alternative) => {
+      return (
+        <IndividualAlternative
           alternative={alternative}
           key={alternative.alternativeDescription}
         />
