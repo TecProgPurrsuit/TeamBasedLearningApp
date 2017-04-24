@@ -9,13 +9,13 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
 
 class ListCreator extends Component {
   constructor(props) {
     super(props);
-    this.state = { listName: '', listDescription: '', questions: '' };
+    this.state = { listName: '', listDescription: '', questions: [] };
 
     this.handleChange = this.handleChange.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
@@ -35,9 +35,10 @@ class ListCreator extends Component {
   sendToDatabase(event) {
     console.log('Sending to database...');
 
-    Lists.insert(this.state, (error, result) => {
-      // If the data in state does not match with the List Schema, it will raise
-      // an error.
+    /** If the data in state does not match with the List Schema, it will raise
+    *   an error.
+    */
+    LISTSDB.insert(this.state, (error, result) => {
       alert('Verifique se todos os campos foram preenchidos corretamente' +
         ', por favor.');
     });
