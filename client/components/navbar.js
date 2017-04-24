@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import cookie from 'react-cookie';
+import connect from 'react-redux';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { selectGroupAnswering, selectIndividualAnswering } from '../actions/index';
@@ -8,7 +9,8 @@ import Logout from './auth/logout';
 class NavBar extends Component {
 
   componentWillMount() {
-    this.currentUser = cookie.load('user');
+    this.props.currentUser;
+    console.log(this.currentUser)
   }
 
   isAuthenticated() {
@@ -70,4 +72,10 @@ NavBar.propTypes = {
   selectIndividualAnswering: React.PropTypes.func.isRequired,
 };
 
-export default connect(null, { selectGroupAnswering, selectIndividualAnswering })(NavBar);
+mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+  };
+}
+
+export default connect(mapStateToProps, { selectGroupAnswering, selectIndividualAnswering })(NavBar);
