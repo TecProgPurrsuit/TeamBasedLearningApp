@@ -9,12 +9,13 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { LISTSDB } from '../../../lib/collections/listsCollection';
+import QuestionCreator from './questionCreator';
 
 class ListCreator extends Component {
   constructor(props) {
     super(props);
-    this.state = { listName: '', listDescription: '', questions: '' };
+    this.state = { listName: '', listDescription: '', questions: [] };
 
     this.handleChange = this.handleChange.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
@@ -34,9 +35,10 @@ class ListCreator extends Component {
   sendToDatabase(event) {
     console.log('Sending to database...');
 
-    Lists.insert(this.state, (error, result) => {
-      // If the data in state does not match with the List Schema, it will raise
-      // an error.
+    /** If the data in state does not match with the List Schema, it will raise
+    *   an error.
+    */
+    LISTSDB.insert(this.state, (error, result) => {
       alert('Verifique se todos os campos foram preenchidos corretamente' +
         ', por favor.');
     });
@@ -51,34 +53,35 @@ class ListCreator extends Component {
     return (
       <div>
         <h1>Criar nova lista</h1>
-        <form>
-          <label>
-            Título da lista:
-            <input
-              type="text" value={this.state.listName}
-              name="listName"
-              onChange={this.handleChange}
-            />
-          </label>
+        <form id="createListForm">
+          <label htmlFor="listTitle">Título da lista:</label>
+          <input
+            id="listTitle"
+            type="text" value={this.state.listName}
+            name="listName"
+            onChange={this.handleChange}
+          />
 
-          <label>
-            Descrição da lista:
-            <input
-              type="text" value={this.state.listDescription}
-              name="listDescription"
-              onChange={this.handleChange}
-            />
-          </label>
+          <label htmlFor="listDescription">Descrição da lista:</label>
+          <input
+            id="listDescription"
+            type="text" value={this.state.listDescription}
+            name="listDescription"
+            onChange={this.handleChange}
+          />
         </form>
 
-        <a className="waves-effect waves-light btn" onClick={this.sendToDatabase}>
-          Salvar Lista
-        </a>
-        <Link to={'/'}>
-          <div className="waves-effect waves-light btn">
-            Adicionar Questão
-          </div>
-        </Link>
+        <QuestionCreator />
+
+        <div className="center-align">
+          <button className="waves-effect waves-light btn" onClick={this.sendToDatabase}>
+            Salvar<i className="material-icons left">save</i>
+          </button>
+          &ensp;
+          <button className="waves-effect waves-light btn">
+            Cancelar<i className="material-icons left">clear</i>
+          </button>
+        </div>
 
       </div>
     );

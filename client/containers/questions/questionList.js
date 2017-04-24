@@ -1,3 +1,11 @@
+/**
+* This file is responsible for render a list os questions to the user
+*
+* @summary Component for a list of questions
+
+  @class QuestionList
+*/
+
 import React, { Component } from 'react';
 import Question from './question';
 
