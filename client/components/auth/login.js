@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import connect from 'react-redux';
 import cookie from 'react-cookie';
 import { Link, browserHistory } from 'react-router';
 import CustomInput from '../customInput';
 import CustomButton from '../customButton';
 import CustomError from '../customError';
+import connectUser from '../actions/index';
 import './authentication.css';
 
 class Login extends Component {
@@ -12,16 +14,14 @@ class Login extends Component {
     this.state = {error: '', isLoggedIn: false, user: null, password: '', registration_number: ''};
   }
 
+
   handleSubmit(event) {
     event.preventDefault();
     let registration_number = this.state.registration_number
     let password = this.state.password;
     Meteor.loginWithPassword(registration_number, password, (error) => {
       if(!error) {
-        this.setState({
-          isLoggedIn: true,
-          user: Meteor.user()
-        });
+        this.props.connectUser(Meteor.user());
         cookie.save('user', Meteor.user(), {path: '/'})
         browserHistory.push('/');
       } else {
@@ -75,4 +75,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser;
+  }
+}
+
+export default connect(mapStateToProps, {connectUser})(Login);
