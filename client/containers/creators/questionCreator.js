@@ -22,7 +22,11 @@ class QuestionCreator extends Component {
     return (
       <div>
         <div id="modalTrigger" className="center-align">
-          <button onClick={this.openQuestionModal} data-target="questionModal" className="waves-effect waves-green btn-flat btn">
+          <button
+            onClick={this.openQuestionModal} data-target="questionModal"
+            className="waves-effect waves-light btn"
+            id="addButton"
+          >
             Adicionar Questão<i className="material-icons left">add</i>
           </button>
         </div>

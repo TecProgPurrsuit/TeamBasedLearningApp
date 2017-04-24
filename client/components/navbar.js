@@ -38,6 +38,9 @@ class NavBar extends Component {
             <i className="material-icons">menu</i>
           </a>
           <ul className="right hide-on-med-and-down">
+            <li>
+              <Link to="/create-list">Criar Lista</Link>
+            </li>
             <li onClick={this.props.selectGroupAnswering}>
               <Link to="/group-simulator">Prova em grupo</Link>
             </li>

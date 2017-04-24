@@ -1,0 +1,14 @@
+#titleHeader {
+  color: white;
+  text-align: center;
+  text-shadow: 0.5px 0.5px 1px #000000;
+}
+
+
+#btnAddQuestion {
+  background-color: white;
+}
+
+.inputForm {
+  color: white;
+}
