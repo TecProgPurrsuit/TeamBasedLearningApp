@@ -9,7 +9,6 @@ class NavBar extends Component {
 
   componentWillMount() {
     this.currentUser = cookie.load('user');
-    console.log(this.currentUser)
   }
 
   isAuthenticated() {
