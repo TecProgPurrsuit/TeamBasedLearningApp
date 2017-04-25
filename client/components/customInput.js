@@ -1,17 +1,17 @@
 import React from 'react';
 
-function CustomInput() {
+function CustomInput(props) {
   let input = null;
 
-  if (this.props.icon) {
+  if (props.icon) {
     input = (
       <div className="input-field">
-        <i className="material-icons prefix">{this.props.icon}</i>
-        <input {...this.props} />
+        <i className="material-icons prefix">{props.icon}</i>
+        <input {...props} />
       </div>
     );
   } else {
-    input = <input {...this.props} />;
+    input = <input {...props} />;
   }
 
   return (

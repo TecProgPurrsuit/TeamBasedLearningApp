@@ -4,7 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import CustomInput from '../customInput';
 import CustomButton from '../customButton';
 import CustomError from '../customError';
-import connectUser from '../../actions/index';
+import { connectUser } from '../../actions/index';
 import './authentication.css';
 
 class Login extends Component {
@@ -81,16 +81,15 @@ class Login extends Component {
   }
 }
 
-
-Login.propTypes = {
-  connectUser: React.PropTypes.func.isRequired,
-};
-
-
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
   };
 }
+
+Login.propTypes = {
+  connectUser: React.PropTypes.func.isRequired,
+};
+
 
 export default connect(mapStateToProps, { connectUser })(Login);

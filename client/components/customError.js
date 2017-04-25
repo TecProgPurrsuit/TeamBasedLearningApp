@@ -1,11 +1,11 @@
 import React from 'react';
 
-function CustomError() {
-  const error = this.props.error;
+function CustomError(props) {
+  const error = props.error;
   let divError = '';
 
   if (error.length > 0) {
-    divError = <div className={this.props.className}>{error}</div>;
+    divError = <div className={props.className}>{error}</div>;
   } else {
     // Do Nothing
   }

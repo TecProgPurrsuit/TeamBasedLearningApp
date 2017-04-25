@@ -2,12 +2,12 @@ import React from 'react';
 import NavBar from './navbar';
 import './app.css';
 
-function App() {
+function App(props) {
   return (
     <div>
       <NavBar />
       <div id="main" className="container">
-        {this.props.children}
+        {props.children}
       </div>
     </div>
   );

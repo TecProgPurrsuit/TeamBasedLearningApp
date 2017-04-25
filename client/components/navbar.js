@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import connect from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { selectGroupAnswering, selectIndividualAnswering } from '../actions/index';
 import Logout from './auth/logout';
@@ -7,8 +7,8 @@ import Logout from './auth/logout';
 class NavBar extends Component {
 
   isAuthenticated() {
-    const userDataAvailable = (this.props.currentUser !== undefined);
-    const loggedIn = (this.props.currentUser && userDataAvailable);
+    const userDataAvailable = (this.props.currentUser.profile);
+    const loggedIn = (this.props.currentUser.profile && userDataAvailable);
     return loggedIn;
   }
 
@@ -59,17 +59,18 @@ class NavBar extends Component {
   }
 }
 
-NavBar.propTypes = {
-  selectGroupAnswering: React.PropTypes.func.isRequired,
-  selectIndividualAnswering: React.PropTypes.func.isRequired,
-  currentUser: React.PropTypes.func.isRequired,
-};
 
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
   };
 }
+
+NavBar.propTypes = {
+  selectGroupAnswering: React.PropTypes.func.isRequired,
+  selectIndividualAnswering: React.PropTypes.func.isRequired,
+  currentUser: React.PropTypes.object.isRequired,
+};
 
 export default connect(
   mapStateToProps,
