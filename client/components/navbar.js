@@ -1,3 +1,9 @@
+/**
+* This file is responsible for creating links to all pages on navbar
+*
+* @summary Navbar.
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -16,6 +22,7 @@ class NavBar extends Component {
     let welcome = '';
     let authentication = null;
 
+    // Verify that the user is logged in and return the Login or Logout button
     if (this.isAuthenticated()) {
       welcome = `Bem vindo ${this.props.currentUser.profile.name}`;
       authentication = <Logout />;

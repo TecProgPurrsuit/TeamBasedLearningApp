@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import CustomInput from '../customInput';
 import CustomButton from '../customButton';
-import CustomError from '../customError';
+import CustomMessage from '../customMessage';
 import './authentication.css';
 
 class Register extends Component {
@@ -10,7 +10,8 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      error: '',
+      message: '',
+      error: false,
       registration_number: '',
       password: '',
       email: '',
@@ -32,7 +33,8 @@ class Register extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevents the browser from reloading the page
+
     const user = {
       username: this.state.registration_number,
       password: this.state.password,
@@ -44,25 +46,53 @@ class Register extends Component {
         is_teacher: false,
       },
     };
-    Meteor.call('userInsert', user);
-    browserHistory.push('/login');
+
+    // Function to create a user
+    Meteor.call('userInsert', user, (error) => {
+      if (!error) {
+        this.setState({ message: 'Successfully created!' });
+        browserHistory.push('/login');
+      } else {
+        this.setState({
+          message: error.reason,
+          error: true,
+        });
+        console.error(error.reason);
+      }
+    });
   }
 
   handleInput(input, event) {
     const changedField = {};
     changedField[input] = event.target.value;
-    this.setState(changedField);
+
+    // Checks if the passed value is blank
+    if (event.target.value !== '') {
+      this.setState(changedField);
+    } else {
+      console.error("Can't insert blank value");
+    }
   }
 
   render() {
+    let messageClass = '';
+    if (this.state.error) {
+      messageClass = 'card-panel red lighten-3';
+    } else {
+      messageClass = 'card-panel teal lighten-2';
+    }
+
     return (
       <div className="register-form">
         <h1>Cadastro</h1>
-        <CustomError
-          className="card-panel red lighten-3"
-          error={this.state.error}
+
+        <CustomMessage
+          className={messageClass}
+          message={this.state.message}
         />
+
         <form onSubmit={this.handleSubmit}>
+
           <CustomInput
             onChange={this.handleInputName}
             value={this.state.name}
@@ -73,6 +103,7 @@ class Register extends Component {
             required
             autoFocus
           />
+
           <CustomInput
             onChange={this.handleInputGroup}
             value={this.state.group}
@@ -90,6 +121,7 @@ class Register extends Component {
             <option value="Grupo 04" />
             <option value="Grupo 05" />
           </datalist>
+
           <CustomInput
             onChange={this.handleInputClass}
             value={this.state.name_of_class}
@@ -101,6 +133,7 @@ class Register extends Component {
             <option value="Medição e Análise" />
             <option value="Requisitos" />
           </datalist>
+
           <CustomInput
             onChange={this.handleInputRegistration}
             value={this.state.registration_number}
@@ -112,6 +145,7 @@ class Register extends Component {
             title="Matricula da UnB - 9 digitos"
             required
           />
+
           <CustomInput
             onChange={this.handleInputEmail}
             value={this.state.email}
@@ -121,6 +155,7 @@ class Register extends Component {
             autoComplete="off"
             required
           />
+
           <CustomInput
             onChange={this.handleInputPassword}
             value={this.state.password}
@@ -130,12 +165,14 @@ class Register extends Component {
             autoComplete="off"
             required
           />
+
           <CustomButton
             type="submit"
             className="waves-effect waves-light btn teal darken-4 button-center"
             icon="send"
             title="Registrar"
           />
+
         </form>
       </div>
     );
