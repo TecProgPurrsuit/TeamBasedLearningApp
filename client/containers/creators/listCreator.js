@@ -37,20 +37,16 @@ class ListCreator extends Component {
     this.setState({
       [name]: targetValue,
     });
-
-    console.log(this.state);
   }
 
   handleEnableChange() {
     this.setState({
       enable: !this.state.enable,
     });
-
-    console.log(this.state);
   }
 
   sendToDatabase(event) {
-    console.log('Sending to database...');
+    console.warn('Sending to database...');
 
     /** If the data in state does not match with the List Schema, it will raise
     *   an error.
@@ -60,7 +56,7 @@ class ListCreator extends Component {
         ', por favor.');
     });
 
-    console.log('Data did not pass on schema validation...');
+    console.warn('Data did not pass on schema validation...');
 
     // The default action for the event will not be triggered.
     event.preventDefault();
