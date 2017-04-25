@@ -20,7 +20,7 @@ App.propTypes = {
 };
 
 App.defaultProps = {
-  children: undefined,
+  children: null,
 };
 
 export default App;

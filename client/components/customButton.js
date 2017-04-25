@@ -15,12 +15,13 @@ class CustomButton extends Component {
 CustomButton.propTypes = {
   type: React.PropTypes.string.isRequired,
   className: React.PropTypes.string,
-  icon: React.PropTypes.string.isRequired,
+  icon: React.PropTypes.string,
   title: React.PropTypes.string.isRequired,
 };
 
 CustomButton.defaultProps = {
   className: '',
+  icon: '',
 };
 
 export default CustomButton;

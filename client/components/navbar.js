@@ -7,7 +7,7 @@ import Logout from './auth/logout';
 class NavBar extends Component {
 
   isAuthenticated() {
-    const userDataAvailable = (this.props.currentUser.username !== undefined);
+    const userDataAvailable = (Meteor.user() !== null);
     const loggedIn = (this.props.currentUser && userDataAvailable);
     return loggedIn;
   }
@@ -64,11 +64,11 @@ class NavBar extends Component {
 NavBar.propTypes = {
   selectGroupAnswering: React.PropTypes.func.isRequired,
   selectIndividualAnswering: React.PropTypes.func.isRequired,
-  currentUser: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object,
 };
 
 NavBar.defaultProps = {
-  currentUser: undefined,
+  currentUser: null,
 };
 
 function mapStateToProps(state) {
