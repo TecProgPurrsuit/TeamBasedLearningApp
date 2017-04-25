@@ -49,7 +49,7 @@ class ListCreator extends Component {
 
   // This function tries to send the data in state to the database
   sendToDatabase(event) {
-    console.log('Sending to database...');
+    console.warn('Sending to database...');
 
     /** If the data in state does not match with the List Schema, it will raise
     *   an error.
@@ -57,7 +57,7 @@ class ListCreator extends Component {
     LISTSDB.insert(this.state, (error, result) => {
       alert('Verifique se todos os campos foram preenchidos corretamente' +
         ', por favor.');
-      console.log('Data did not pass on schema validation...');
+      console.warn('Data did not pass on schema validation...');
     });
 
     // The default action for the event will not be triggered.

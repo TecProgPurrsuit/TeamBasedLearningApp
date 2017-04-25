@@ -10,7 +10,7 @@ class Logout extends Component {
         cookie.remove('user', {path: '/'})
         // window.location.reload();
       } else {
-        console.log(error.reason);
+        console.error(error.reason);
       }
     });
   }

@@ -52,7 +52,6 @@ class AvailableQuestion extends Component {
   }
 
   renderIcon(){
-    console.log("came here")
     return(
       <div>Function called</div>
     )
@@ -110,7 +109,6 @@ class AvailableQuestion extends Component {
 
   renderTempletTabContent(questionList){
     return questionList.map((question) => {
-      console.log(question.alternatives);
       return (
         <div key={question.id} id={question.id}>
           {question.description}
