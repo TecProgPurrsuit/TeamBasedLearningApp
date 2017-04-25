@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import cookie from 'react-cookie';
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router';
 
 class Logout extends Component {
 
   logout() {
     Meteor.logout((error) => {
-      if(!error) {
-        cookie.remove('user', {path: '/'})
-        // window.location.reload();
+      if (!error) {
+        browserHistory.push('/');
       } else {
         console.error(error.reason);
       }
@@ -16,9 +14,9 @@ class Logout extends Component {
   }
 
   render() {
-    return(
-      <li onClick={this.logout.bind(this)}>
-        <Link to="/login">Logout</Link>
+    return (
+      <li>
+        <Link onClick={this.logout} to="/login">Logout</Link>
       </li>
     );
   }
