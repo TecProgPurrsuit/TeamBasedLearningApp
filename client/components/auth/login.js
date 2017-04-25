@@ -53,6 +53,7 @@ class Login extends Component {
     });
   }
 
+
   handleInput(input, event) {
     const changedField = {};
     changedField[input] = event.target.value;
@@ -64,6 +65,7 @@ class Login extends Component {
       console.error("Can't insert blank value");
     }
   }
+
 
   render() {
     let messageClass = '';
@@ -133,6 +135,5 @@ function mapStateToProps(state) {
     currentUser: state.currentUser,
   };
 }
-
 
 export default connect(mapStateToProps, { connectUser })(Login);

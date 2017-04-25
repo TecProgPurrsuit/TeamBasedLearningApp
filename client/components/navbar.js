@@ -44,13 +44,25 @@ class NavBar extends Component {
             </a>
             <ul className="right hide-on-med-and-down">
               <li>
-                <Link onClick={this.props.selectGroupAnswering} to="/group-simulator">Prova em grupo</Link>
+                <Link
+                  onClick={this.props.selectGroupAnswering}
+                  to="/group-simulator">
+                  Prova em grupo
+                </Link>
               </li>
               <li>
-                <Link onClick={this.props.selectIndividualAnswering} to="/individual-simulator">Prova individual</Link>
+                <Link
+                  onClick={this.props.selectIndividualAnswering}
+                  to="/individual-simulator">
+                  Prova individual
+                </Link>
               </li>
               <li>
-                <Link onClick={this.props.selectIndividualAnswering} to="/available-questions">Listas disponíveis</Link>
+                <Link
+                  onClick={this.props.selectIndividualAnswering}
+                  to="/available-questions">
+                  Listas disponíveis
+                </Link>
               </li>
               { authentication }
             </ul>
@@ -68,9 +80,17 @@ class NavBar extends Component {
   }
 }
 
+
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+  };
+}
+
 NavBar.propTypes = {
   selectGroupAnswering: React.PropTypes.func.isRequired,
   selectIndividualAnswering: React.PropTypes.func.isRequired,
+<<<<<<< HEAD
   currentUser: React.PropTypes.object,
 };
 
@@ -84,6 +104,11 @@ function mapStateToProps(state) {
   };
 }
 
+=======
+  currentUser: React.PropTypes.object.isRequired,
+};
+
+>>>>>>> a67fdbf92b760c5e95b0a7c8ef3893e24067d55c
 export default connect(
   mapStateToProps,
   { selectGroupAnswering, selectIndividualAnswering },

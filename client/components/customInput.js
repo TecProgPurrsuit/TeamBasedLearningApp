@@ -18,7 +18,7 @@ function CustomInput(props) {
       </div>
     );
   } else {
-    input = <input {... props} />;
+    input = <input {...props} />;
   }
 
   return (
