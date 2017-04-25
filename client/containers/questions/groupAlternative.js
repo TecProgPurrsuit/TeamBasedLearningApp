@@ -52,7 +52,6 @@ class GroupAlternative extends Component {
         <a className="collection-item black-text">
           {this.props.alternative.alternativeDescription}
         </a>
-
       </div>
     );
   }
