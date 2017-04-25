@@ -1,10 +1,10 @@
 import React from 'react';
 
-function CustomButton() {
+function CustomButton(props) {
   return (
-    <button type={this.props.type} className={this.props.className}>
-      <i className="material-icons left">{this.props.icon}</i>
-      {this.props.title}
+    <button type={props.type} className={props.className}>
+      <i className="material-icons left">{props.icon}</i>
+      {props.title}
     </button>
   );
 }
