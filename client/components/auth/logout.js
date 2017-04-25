@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { connectUser } from '../../actions/index';
 
 class Logout extends Component {
 
-  logout() {
+  constructor() {
+    super();
+    this.authenticationLogout = this.authenticationLogout.bind(this);
+  }
+
+  authenticationLogout() {
     Meteor.logout((error) => {
       if (!error) {
-        browserHistory.push('/');
+        this.props.connectUser(Meteor.user());
+        browserHistory.push('/login');
       } else {
         console.error(error.reason);
       }
@@ -16,11 +24,25 @@ class Logout extends Component {
   render() {
     return (
       <li>
-        <Link onClick={this.logout} to="/login">Logout</Link>
+        <Link onClick={this.authenticationLogout} to="/login">Logout</Link>
       </li>
     );
   }
 
 }
 
-export default Logout;
+Logout.propTypes = {
+  connectUser: React.PropTypes.func,
+};
+
+Logout.defaultProps = {
+  connectUser: null,
+};
+
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+  };
+}
+
+export default connect(mapStateToProps, { connectUser })(Logout);

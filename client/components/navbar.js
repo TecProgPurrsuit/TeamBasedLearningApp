@@ -7,14 +7,15 @@ import Logout from './auth/logout';
 class NavBar extends Component {
 
   isAuthenticated() {
-    const userDataAvailable = (this.props.currentUser.profile);
-    const loggedIn = (this.props.currentUser.profile && userDataAvailable);
+    const userDataAvailable = (this.props.currentUser.username !== undefined);
+    const loggedIn = (this.props.currentUser && userDataAvailable);
     return loggedIn;
   }
 
   render() {
     let welcome = '';
     let authentication = null;
+
     if (this.isAuthenticated()) {
       welcome = `Bem vindo ${this.props.currentUser.profile.name}`;
       authentication = <Logout />;
@@ -22,6 +23,7 @@ class NavBar extends Component {
       welcome = '';
       authentication = <li><Link to="/login">Login</Link></li>;
     }
+
     return (
       <div>
         <nav className="teal darken-4">
@@ -59,18 +61,21 @@ class NavBar extends Component {
   }
 }
 
+NavBar.propTypes = {
+  selectGroupAnswering: React.PropTypes.func.isRequired,
+  selectIndividualAnswering: React.PropTypes.func.isRequired,
+  currentUser: React.PropTypes.object.isRequired,
+};
+
+NavBar.defaultProps = {
+  currentUser: undefined,
+};
 
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
   };
 }
-
-NavBar.propTypes = {
-  selectGroupAnswering: React.PropTypes.func.isRequired,
-  selectIndividualAnswering: React.PropTypes.func.isRequired,
-  currentUser: React.PropTypes.object.isRequired,
-};
 
 export default connect(
   mapStateToProps,

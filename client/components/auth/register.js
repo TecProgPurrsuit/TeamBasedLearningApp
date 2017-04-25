@@ -20,6 +20,15 @@ class Register extends Component {
       classes: [],
       groups: [],
     };
+    // Finding the input and run the randleInput and handleSubmit function
+    // ESLint requirement
+    this.handleInputName = this.handleInput.bind(this, 'name');
+    this.handleInputGroup = this.handleInput.bind(this, 'group');
+    this.handleInputClass = this.handleInput.bind(this, 'name_of_class');
+    this.handleInputRegistration = this.handleInput.bind(this, 'registration_number');
+    this.handleInputEmail = this.handleInput.bind(this, 'email');
+    this.handleInputPassword = this.handleInput.bind(this, 'password');
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
@@ -55,7 +64,7 @@ class Register extends Component {
         />
         <form onSubmit={this.handleSubmit}>
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputName}
             value={this.state.name}
             type="text"
             className="input-field white-text"
@@ -65,7 +74,7 @@ class Register extends Component {
             autoFocus
           />
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputGroup}
             value={this.state.group}
             list="groups"
             className="white-text"
@@ -82,7 +91,7 @@ class Register extends Component {
             <option value="Grupo 05" />
           </datalist>
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputClass}
             value={this.state.name_of_class}
             list="classes"
             className="white-text"
@@ -93,7 +102,7 @@ class Register extends Component {
             <option value="Requisitos" />
           </datalist>
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputRegistration}
             value={this.state.registration_number}
             type="text"
             className="input-field white-text"
@@ -104,7 +113,7 @@ class Register extends Component {
             required
           />
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputEmail}
             value={this.state.email}
             type="email"
             className="input-field white-text validate"
@@ -113,7 +122,7 @@ class Register extends Component {
             required
           />
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputPassword}
             value={this.state.password}
             type="password"
             className="input-field white-text"

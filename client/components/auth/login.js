@@ -1,3 +1,10 @@
+/**
+* This file is responsible for logging the user into the system
+*
+* @summary Logging the user into the system.
+*/
+
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
@@ -10,18 +17,28 @@ import './authentication.css';
 class Login extends Component {
 
   componentWillMount() {
-    this.state = { error: '', password: '', registration_number: '' };
+    this.state = {
+      error: '',
+      password: '',
+      registration_number: '',
+    };
+    // Finding the input and run the randleInput and handleSubmit function
+    // ESLint requirement
+    this.handleInputUser = this.handleInput.bind(this, 'registration_number');
+    this.handleInputPassword = this.handleInput.bind(this, 'password');
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevents the browser from reloading the page
 
     const registrationNumber = this.state.registration_number;
     const password = this.state.password;
 
     Meteor.loginWithPassword(registrationNumber, password, (error) => {
       if (!error) {
+        console.log(Meteor.user());
         this.props.connectUser(Meteor.user());
         browserHistory.push('/');
       } else {
@@ -50,7 +67,7 @@ class Login extends Component {
         />
         <form className="input-login" id="login-form" onSubmit={this.handleSubmit}>
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputUser}
             value={this.state.registration_number}
             icon="account_circle"
             type="text"
@@ -60,7 +77,7 @@ class Login extends Component {
             autoFocus
           />
           <CustomInput
-            onChange={this.handleInput}
+            onChange={this.handleInputPassword}
             value={this.state.password}
             icon="lock"
             type="password"
@@ -81,15 +98,19 @@ class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  connectUser: React.PropTypes.func,
+};
+
+Login.defaultProps = {
+  connectUser: null,
+};
+
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
   };
 }
-
-Login.propTypes = {
-  connectUser: React.PropTypes.func.isRequired,
-};
 
 
 export default connect(mapStateToProps, { connectUser })(Login);
