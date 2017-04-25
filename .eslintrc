@@ -8,6 +8,7 @@
     "mocha": true
   },
   "rules": {
+    "no-console": ["error", { allow: ["warn", "error"] }],
     "arrow-body-style": ["error", "as-needed"],
     "react/forbid-prop-types": [1, { "forbid": [<string>] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],

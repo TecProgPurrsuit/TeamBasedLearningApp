@@ -28,7 +28,7 @@ class AuthContainer extends Component {
     event.preventDefault();
     Meteor.logout( (err) => {
       if(err) {
-        console.log(err.reason);
+        console.error(err.reason);
       } else {
         browserHistory.push('/login');
       }
