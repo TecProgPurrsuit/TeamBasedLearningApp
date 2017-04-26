@@ -11,7 +11,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class AvailableQuestion extends Component {
-
+//This class manages all components of available questions
   renderAvailableQuestions() {
     const questions = this.props.questionListData;
 
@@ -68,6 +68,7 @@ class AvailableQuestion extends Component {
   }
 
   answeredQuestion(props) {
+    //This component is used in case the question list has been answered
     return(
       <div className="card-action">
         <a className="activator">Ver respostas certas</a>
@@ -76,6 +77,7 @@ class AvailableQuestion extends Component {
   }
 
   unansweredQuestion(props) {
+    //This component is used in case the question list was not answered
     return(
       <div className="card-action">
         <a>Responder Questionário</a>
@@ -84,6 +86,7 @@ class AvailableQuestion extends Component {
   }
 
   checkIfAnswered(question) {
+    //This function return a component according to if it's answered or not
     if (question.answered) {
       return <this.answeredQuestion />;
     }else{
@@ -93,6 +96,7 @@ class AvailableQuestion extends Component {
   }
 
   renderAnswer(templet){
+    //This is a nested component that only return the answer data
     return templet.map((question) => {
       return (
         <a href="#" className="collection-item">
@@ -106,6 +110,7 @@ class AvailableQuestion extends Component {
   }
 
   renderTempletCardTabs(questionList){
+    //This component is a tab with all the questions of the available list
     return questionList.map((question) => {
       return (
         <div key={question.id}>
@@ -118,6 +123,7 @@ class AvailableQuestion extends Component {
   }
 
   renderTempletTabContent(questionList){
+    //This component disposes the content under the tabs
     return questionList.map((question) => {
       return (
         <div key={question.id} id={question.id}>
@@ -138,6 +144,7 @@ function mapStateToProps(state) {
 }
 
 function filterAvailableQuestions (allQuestions) {
+  //This function separate available question lists from all question lists
   var available_questions = [];
 
   allQuestions.map((question) => {

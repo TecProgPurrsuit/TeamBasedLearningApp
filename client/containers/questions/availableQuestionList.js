@@ -11,6 +11,7 @@ import AvailableQuestion from './availableQuestion';
 
 
 class AvailableQuestionList extends Component {
+  //This component only displays available question list in table
   render() {
     return (
       <div className="row">
