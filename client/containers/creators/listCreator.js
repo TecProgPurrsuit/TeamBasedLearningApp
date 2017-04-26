@@ -12,12 +12,19 @@ import { connect } from 'react-redux';
 import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
 
+require('./style/listCreatorStyle.css');
+
 class ListCreator extends Component {
   constructor(props) {
     super(props);
-    this.state = { listName: '', listDescription: '', questions: [] };
+    this.state = { listName: '',
+      listDescription: '',
+      enable: false,
+      questions: [],
+    };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleEnableChange = this.handleEnableChange.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
   }
 
@@ -32,8 +39,14 @@ class ListCreator extends Component {
     });
   }
 
+  handleEnableChange() {
+    this.setState({
+      enable: !this.state.enable,
+    });
+  }
+
   sendToDatabase(event) {
-    console.log('Sending to database...');
+    console.warn('Sending to database...');
 
     /** If the data in state does not match with the List Schema, it will raise
     *   an error.
@@ -43,7 +56,7 @@ class ListCreator extends Component {
         ', por favor.');
     });
 
-    console.log('Data did not pass on schema validation...');
+    console.warn('Data did not pass on schema validation...');
 
     // The default action for the event will not be triggered.
     event.preventDefault();
@@ -52,7 +65,8 @@ class ListCreator extends Component {
   render() {
     return (
       <div>
-        <h1>Criar nova lista</h1>
+        <h1 id="titleHeader">Criar nova lista</h1>
+
         <form id="createListForm">
           <label htmlFor="listTitle">Título da lista:</label>
           <input
@@ -60,6 +74,7 @@ class ListCreator extends Component {
             type="text" value={this.state.listName}
             name="listName"
             onChange={this.handleChange}
+            className="inputForm"
           />
 
           <label htmlFor="listDescription">Descrição da lista:</label>
@@ -68,8 +83,24 @@ class ListCreator extends Component {
             type="text" value={this.state.listDescription}
             name="listDescription"
             onChange={this.handleChange}
+            className="inputForm"
           />
         </form>
+
+        <div className="switch">
+          <label>
+            Não disponível
+            <input
+              type="checkbox"
+              name="enable"
+              onChange={this.handleEnableChange}
+              checked={this.state.enable}
+            />
+            <span className="lever" />
+            Disponível
+          </label>
+        </div>
+        <br />
 
         <QuestionCreator />
 
@@ -92,6 +123,7 @@ function mapStateToProps(state) {
   return {
     listName: state.listName,
     listDescription: state.listDescription,
+    enable: state.enable,
     questions: state.questions,
   };
 }

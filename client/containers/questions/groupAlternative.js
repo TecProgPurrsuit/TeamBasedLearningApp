@@ -34,7 +34,7 @@ class GroupAlternative extends Component {
 
   groupAnswerListener(alternative) {
     if (this.state.wasSelected) {
-      console.log('Alternative was already selected.');
+      console.warn('Alternative was already selected.');
     } else {
       this.showAnswerResults(alternative);
       this.state.wasSelected = true;

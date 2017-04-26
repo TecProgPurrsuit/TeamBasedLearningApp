@@ -14,18 +14,6 @@ require('./style/question.css');
 
 class Question extends Component {
 
-  static renderQuestionAlternative(question) {
-    return question.alternatives.map((alternative) => {
-      return (
-        <div className="card-action" key={alternative.alternativeDescription} >
-          <a className="collection-item black-text" >
-            {alternative.alternativeDescription}
-          </a>
-        </div>
-      );
-    });
-  }
-
   renderQuestions() {
     const questions = this.props.questionListData[0].questions;
     return questions.map((question) => {

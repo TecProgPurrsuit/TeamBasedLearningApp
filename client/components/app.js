@@ -1,18 +1,30 @@
-import React, { Component } from 'react';
-import NavBar from './navbar';
-import './app.css'
+/**
+* This file is the main of application.
+*
+* @summary Main file.
+*/
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar />
-        <div id="main" className="container">
-          {this.props.children}
-        </div>
+import React from 'react';
+import NavBar from './navbar';
+import './app.css';
+
+function App(props) {
+  return (
+    <div>
+      <NavBar />
+      <div id="main" className="container">
+        {props.children}
       </div>
-    );
-  }
+    </div>
+  );
+}
+
+App.propTypes = {
+  children: React.PropTypes.object,
+};
+
+App.defaultProps = {
+  children: null,
 };
 
 export default App;
