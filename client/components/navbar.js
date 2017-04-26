@@ -13,6 +13,7 @@ import Logout from './auth/logout';
 class NavBar extends Component {
 
   isAuthenticated() {
+    /* global Meteor comes from Meteor library*/
     const userDataAvailable = (Meteor.user() !== null);
     const loggedIn = (this.props.currentUser && userDataAvailable);
     return loggedIn;
