@@ -1,3 +1,12 @@
+/**
+* This file is responsible for create and organize componets and child
+*   components to show the available questions and templet when needed.
+*
+* @summary Separate components of all available questions list
+*
+  @class AvailableQuestion
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -110,7 +119,6 @@ class AvailableQuestion extends Component {
 
   renderTempletTabContent(questionList){
     return questionList.map((question) => {
-      console.log(question.alternatives);
       return (
         <div key={question.id} id={question.id}>
           {question.description}
