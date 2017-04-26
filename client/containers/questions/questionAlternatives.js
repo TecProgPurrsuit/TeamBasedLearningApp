@@ -9,34 +9,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GroupAlternative from './groupAlternative';
+import IndividualAlternative from './individualAlternative';
 
 require('./style/question.css');
 
 class QuestionAlternatives extends Component {
-  constructor(props) {
-    super(props);
-    this.renderQuestionAlternative = this.renderQuestionAlternative.bind(this);
-    this.renderGroupAlternatives = this.renderGroupAlternatives.bind(this);
-    this.state = { alternativeStyle: { } };
-  }
-
-  renderQuestionAlternative(questionAlternatives) {
-    if (this.props.typeOfAnswering === 'GroupAnswering') {
+  static renderIndividualAlternatives(questionAlternatives) {
+    return questionAlternatives.map((alternative) => {
       return (
-        <div>
-          {this.renderGroupAlternatives(questionAlternatives)}
-        </div>
+        <IndividualAlternative
+          alternative={alternative}
+          key={alternative.alternativeDescription}
+        />
       );
-    } else if (this.props.typeOfAnswering === 'IndividualAnswering') {
-      // QuestionAlternatives.renderIndividualAlternatives(questionAlternatives);
-    }
+    });
   }
 
-  clearAlternativeStyle() {
-    this.setState({ alternativeStyle: false });
-  }
-
-  renderGroupAlternatives(questionAlternatives) {
+  static renderGroupAlternatives(questionAlternatives) {
     return questionAlternatives.map((alternative) => {
       return (
         <GroupAlternative
@@ -45,6 +34,37 @@ class QuestionAlternatives extends Component {
         />
       );
     });
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = { alternativeStyle: { } };
+  }
+
+  clearAlternativeStyle() {
+    this.setState({ alternativeStyle: false });
+  }
+
+  renderQuestionAlternative(questionAlternatives) {
+    let typeOfAlternative = (
+      <div className="progress">
+        <div className="indeterminate" />
+      </div>
+    );
+    if (this.props.typeOfAnswering === 'GroupAnswering') {
+      typeOfAlternative = (
+        <div>
+          {QuestionAlternatives.renderGroupAlternatives(questionAlternatives)}
+        </div>
+      );
+    } else if (this.props.typeOfAnswering === 'IndividualAnswering') {
+      typeOfAlternative = (
+        <div>
+          {QuestionAlternatives.renderIndividualAlternatives(questionAlternatives)}
+        </div>
+      );
+    }
+    return typeOfAlternative;
   }
 
   render() {

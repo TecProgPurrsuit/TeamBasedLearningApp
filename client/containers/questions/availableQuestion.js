@@ -61,7 +61,6 @@ class AvailableQuestion extends Component {
   }
 
   renderIcon(){
-    console.log("came here")
     return(
       <div>Function called</div>
     )
