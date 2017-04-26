@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import AvailableQuestionList from './questions/availableQuestionList';
 
 class AvailableQuestions extends Component {
-  //This class return all components container
+  // This class return all components container
   render() {
     return (
       <AvailableQuestionList />
