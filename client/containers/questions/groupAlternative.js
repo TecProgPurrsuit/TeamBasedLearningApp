@@ -16,13 +16,27 @@ class GroupAlternative extends Component {
   }
 
   showAnswerResults(alternative) {
+    /**
+     * @summary Applying the alternative's style according to the user's answer.
+     *
+     * The alternative's style is changed to a special style according to the
+       user's answer: if it's a correct answer, so the style is formated to the
+       CORRECT_ANSWER_STYLE, the same for a wrong answer, that the style will be
+       WRONG_ANSWER_STYLE.
+     *
+     * @param Alternative alternative The alternative that the answer will be analized.
+    */
+
+    const CORRECT_ANSWER_COLOR = 'green';
+    const WRONG_ANSWER_COLOR = 'red';
     const WRONG_ANSWER = 0;
     const CORRECT_ANSWER_STYLE = {
-      backgroundColor: 'green',
+      backgroundColor: CORRECT_ANSWER_COLOR,
     };
     const WRONG_ANSWER_STYLE = {
-      backgroundColor: 'red',
+      backgroundColor: WRONG_ANSWER_COLOR,
     };
+
     if (this.state.alternativeStyle) {
       this.setState({ alternativeStyle: null });
     } else if (alternative.alternativePoints !== WRONG_ANSWER) {
@@ -33,11 +47,13 @@ class GroupAlternative extends Component {
   }
 
   groupAnswerListener(alternative) {
-    if (this.state.wasSelected) {
-      console.warn('Alternative was already selected.');
-    } else {
+    const ANTERNATIVE_ALREADY_SELECTED_WARN = 'Alternative was already selected.';
+
+    if (!this.state.wasSelected) {
       this.showAnswerResults(alternative);
       this.state.wasSelected = true;
+    } else {
+      console.warn(ANTERNATIVE_ALREADY_SELECTED_WARN);
     }
   }
 

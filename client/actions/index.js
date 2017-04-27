@@ -7,9 +7,10 @@
 export const SELECT_GROUP_ANSWERING = 'SELECT_GROUP_ANSWERING';
 export const SELECT_INDIVIDUAL_ANSWERING = 'SELECT_INDIVIDUAL_ANSWERING';
 export const CONNECT_USER = 'CONNECT_USER';
+export const GROUP_ANSWERING = 'GroupAnswering';
+export const INDIVIDUAL_ANSWERING = 'IndividualAnswering';
 
 export function selectGroupAnswering() {
-  const GROUP_ANSWERING = 'GroupAnswering';
   return {
     type: SELECT_GROUP_ANSWERING,
     payload: GROUP_ANSWERING,
@@ -17,7 +18,6 @@ export function selectGroupAnswering() {
 }
 
 export function selectIndividualAnswering() {
-  const INDIVIDUAL_ANSWERING = 'IndividualAnswering';
   return {
     type: SELECT_INDIVIDUAL_ANSWERING,
     payload: INDIVIDUAL_ANSWERING,
