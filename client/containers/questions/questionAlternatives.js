@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GroupAlternative from './groupAlternative';
 import IndividualAlternative from './individualAlternative';
+import { GROUP_ANSWERING, INDIVIDUAL_ANSWERING } from '../../actions/index';
 
 require('./style/question.css');
 
@@ -51,13 +52,14 @@ class QuestionAlternatives extends Component {
         <div className="indeterminate" />
       </div>
     );
-    if (this.props.typeOfAnswering === 'GroupAnswering') {
+
+    if (this.props.typeOfAnswering === GROUP_ANSWERING) {
       typeOfAlternative = (
         <div>
           {QuestionAlternatives.renderGroupAlternatives(questionAlternatives)}
         </div>
       );
-    } else if (this.props.typeOfAnswering === 'IndividualAnswering') {
+    } else if (this.props.typeOfAnswering === INDIVIDUAL_ANSWERING) {
       typeOfAlternative = (
         <div>
           {QuestionAlternatives.renderIndividualAlternatives(questionAlternatives)}
