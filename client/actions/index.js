@@ -6,7 +6,7 @@
 
 export const SELECT_GROUP_ANSWERING = 'SELECT_GROUP_ANSWERING';
 export const SELECT_INDIVIDUAL_ANSWERING = 'SELECT_INDIVIDUAL_ANSWERING';
-
+export const CONNECT_USER = 'CONNECT_USER';
 
 export function selectGroupAnswering() {
   const GROUP_ANSWERING = 'GroupAnswering';
@@ -21,5 +21,13 @@ export function selectIndividualAnswering() {
   return {
     type: SELECT_INDIVIDUAL_ANSWERING,
     payload: INDIVIDUAL_ANSWERING,
+  };
+}
+
+export function connectUser(user) {
+  const currentUser = user;
+  return {
+    type: CONNECT_USER,
+    payload: currentUser,
   };
 }

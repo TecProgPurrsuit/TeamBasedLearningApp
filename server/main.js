@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 import fakeInitialData from '../lib/collections/fakeListData';
 import { LISTSDB } from '../lib/collections/listsCollection';
 
@@ -15,11 +15,7 @@ Meteor.startup(() => {
     * cleared and re-populated the the data in reducerFakeData.js.
     * The objects now in the LISTSDB are displayed in the terminal (Server).
     */
+
   LISTSDB.remove({});
-
   LISTSDB.insert(fakeInitialData);
-
-  // For development purposes
-  console.log('Data in Lists Collection right now: ');
-  console.log(LISTSDB.find().fetch());
 });

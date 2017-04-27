@@ -8,8 +8,12 @@
 */
 
 import React, { Component } from 'react';
-// import { LISTSDB } from '../../../lib/collections/listsCollection';
+
+import Meteor from 'meteor/meteor';
+import { connect } from 'react-redux';
+import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
+
 
 require('./style/listCreatorStyle.css');
 
@@ -38,21 +42,28 @@ class ListCreator extends Component {
     questions.push(question);
     this.setState({ /*  listName, listDescription, enable,*/questions });
   }
-  /*
+
   // This function tries to send the data in state to the database
   sendToDatabase(event) {
     console.warn('Sending to database...');
 
     LISTSDB.insert(this.state, (error, result) => {
-      alert('Verifique se todos os campos foram preenchidos corretamente' +
-        ', por favor.');
-      console.warn('Data did not pass on schema validation...');
+      // info about what went wrong
+      if (error) console.warn(error);
+      // the _id of new object if successful
+      if (result) console.warn(result);
+      // alert('Verifique se todos os campos foram preenchidos corretamente, por favor.');
+      // console.warn('Data did not pass on schema validation...');
     });
+
+    /** If the data in state does not match with the List Schema, it will raise
+    *   an error.
+    */
+    Meteor.call('listsCreator.insert', this.state);
 
     // The default action for the event will not be triggered.
     event.preventDefault();
   }
-  */
 
   render() {
     return (
@@ -111,4 +122,4 @@ class ListCreator extends Component {
   }
 }
 
-export default ListCreator;
+export default connect()(ListCreator);

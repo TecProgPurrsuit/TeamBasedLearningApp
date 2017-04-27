@@ -46,7 +46,11 @@ class QuestionAlternatives extends Component {
   }
 
   renderQuestionAlternative(questionAlternatives) {
-    let typeOfAlternative = null;
+    let typeOfAlternative = (
+      <div className="progress">
+        <div className="indeterminate" />
+      </div>
+    );
     if (this.props.typeOfAnswering === 'GroupAnswering') {
       typeOfAlternative = (
         <div>

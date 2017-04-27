@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import CustomInput from '../customInput';
 import CustomButton from '../customButton';
-import CustomError from '../customError';
+import CustomMessage from '../customMessage';
 import './authentication.css';
 
 class Register extends Component {
@@ -10,7 +10,8 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      error: '',
+      message: '',
+      error: false,
       registration_number: '',
       password: '',
       email: '',
@@ -20,11 +21,21 @@ class Register extends Component {
       classes: [],
       groups: [],
     };
+    // Finding the input and run the randleInput and handleSubmit function
+    // ESLint requirement
+    this.handleInputName = this.handleInput.bind(this, 'name');
+    this.handleInputGroup = this.handleInput.bind(this, 'group');
+    this.handleInputClass = this.handleInput.bind(this, 'name_of_class');
+    this.handleInputRegistration = this.handleInput.bind(this, 'registration_number');
+    this.handleInputEmail = this.handleInput.bind(this, 'email');
+    this.handleInputPassword = this.handleInput.bind(this, 'password');
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    let user = {
+    event.preventDefault(); // Prevents the browser from reloading the page
+
+    const user = {
       username: this.state.registration_number,
       password: this.state.password,
       profile: {
@@ -32,64 +43,99 @@ class Register extends Component {
         email: this.state.email,
         group: this.state.group,
         name_of_class: this.state.name_of_class,
-        is_teacher: false
-      }
+        is_teacher: false,
+      },
     };
-    Meteor.call('userInsert', user);
-    browserHistory.push('/login');
+
+    // Function to create a user
+    Meteor.call('userInsert', user, (error) => {
+      if (!error) {
+        this.setState({ message: 'Successfully created!' });
+        browserHistory.push('/login');
+      } else {
+        this.setState({
+          message: error.reason,
+          error: true,
+        });
+        console.error(error.reason);
+      }
+    });
   }
 
   handleInput(input, event) {
-    let changedField = {};
+    const changedField = {};
     changedField[input] = event.target.value;
-    this.setState(changedField);
+
+    // Checks if the passed value is blank
+    if (event.target.value !== ' ') {
+      this.setState(changedField);
+    } else {
+      console.error("Can't insert blank value");
+    }
   }
 
   render() {
+    let messageClass = '';
+    if (this.state.error) {
+      messageClass = 'card-panel red lighten-3';
+    } else {
+      messageClass = 'card-panel teal lighten-2';
+    }
+
     return (
       <div className="register-form">
         <h1>Cadastro</h1>
-        <CustomError
-          className="card-panel red lighten-3"
-          error={this.state.error} />
-        <form onSubmit={this.handleSubmit.bind(this)}>
+
+        <CustomMessage
+          className={messageClass}
+          message={this.state.message}
+        />
+
+        <form onSubmit={this.handleSubmit}>
+
           <CustomInput
-            onChange={this.handleInput.bind(this, 'name')}
+            onChange={this.handleInputName}
             value={this.state.name}
             type="text"
             className="input-field white-text"
             placeholder="Nome"
             autoComplete="off"
             required
-            autoFocus />
+            autoFocus
+          />
+
           <CustomInput
-            onChange={this.handleInput.bind(this, 'group')}
+            onChange={this.handleInputGroup}
             value={this.state.group}
             list="groups"
             className="white-text"
             pattern="(Grupo [0-9]+)"
             title="Escolha uma das alternativas"
             required
-            placeholder="Grupos" />
-            <datalist id="groups">
-              <option value="Grupo 01" />
-              <option value="Grupo 02" />
-              <option value="Grupo 03" />
-              <option value="Grupo 04" />
-              <option value="Grupo 05" />
-            </datalist>
+            placeholder="Grupos"
+          />
+          <datalist id="groups">
+            <option value="Grupo 01" />
+            <option value="Grupo 02" />
+            <option value="Grupo 03" />
+            <option value="Grupo 04" />
+            <option value="Grupo 05" />
+          </datalist>
+
           <CustomInput
-            onChange={this.handleInput.bind(this, 'name_of_class')}
+            onChange={this.handleInputClass}
             value={this.state.name_of_class}
             list="classes"
             className="white-text"
-            placeholder="Disciplinas" />
-            <datalist id="classes">
-              <option value="Medição e Análise" />
-              <option value="Requisitos" />
-            </datalist>
+            placeholder="Disciplinas"
+          />
+          <datalist id="classes">
+            <option value="Medição e Análise" />
+            <option value="Requisitos" />
+          </datalist>
+
           <CustomInput
-            onChange={this.handleInput.bind(this, 'registration_number')}
+            onChange={this.handleInputRegistration}
             value={this.state.registration_number}
             type="text"
             className="input-field white-text"
@@ -97,28 +143,36 @@ class Register extends Component {
             autoComplete="off"
             pattern="[0-9]{9}"
             title="Matricula da UnB - 9 digitos"
-            required />
+            required
+          />
+
           <CustomInput
-            onChange={this.handleInput.bind(this, 'email')}
+            onChange={this.handleInputEmail}
             value={this.state.email}
             type="email"
             className="input-field white-text validate"
             placeholder="Email"
             autoComplete="off"
-            required />
+            required
+          />
+
           <CustomInput
-            onChange={this.handleInput.bind(this, 'password')}
+            onChange={this.handleInputPassword}
             value={this.state.password}
             type="password"
             className="input-field white-text"
             placeholder="Senha"
             autoComplete="off"
-            required />
+            required
+          />
+
           <CustomButton
             type="submit"
             className="waves-effect waves-light btn teal darken-4 button-center"
             icon="send"
-            title="Registrar" />
+            title="Registrar"
+          />
+
         </form>
       </div>
     );

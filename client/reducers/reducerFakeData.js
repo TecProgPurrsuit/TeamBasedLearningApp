@@ -4,13 +4,14 @@
 * @summary Fake list data for use in other parts as needed
 */
 
-import { SCHEMASLIST } from '../../lib/collections/schemas';
+import SCHEMASLIST from '../../lib/collections/schemas';
 
 const FAKELISTS = [{
   // First List
   title: 'Questionário 01',
   description: 'Questionário para a atividade da aula 01.',
   enable: true,
+  closed: false,
   questions: [
     {
       description: 'De acordo com o modelo de requisitos do SAFe, um item de backlog pode ser, EXCETO:',
@@ -61,6 +62,7 @@ const FAKELISTS = [{
   title: 'Questionário 02',
   description: 'Questionário para a atividade da aula 02.',
   enable: true,
+  closed: false,
   questions: [
     {
       description: 'De acordo com o modelo de requisitos do SAFe, um item de backlog pode ser, EXCETO:',
