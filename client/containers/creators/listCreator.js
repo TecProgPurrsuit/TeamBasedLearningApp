@@ -8,8 +8,7 @@
 */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { LISTSDB } from '../../../lib/collections/listsCollection';
+// import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
 
 require('./style/listCreatorStyle.css');
@@ -23,37 +22,27 @@ class ListCreator extends Component {
       questions: [],
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleEnableChange = this.handleEnableChange.bind(this);
+    this.setQuestion = this.setQuestion.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
   }
 
-  // This function is responsible for handling changes in input forms
-  handleChange(event) {
-    const target = event.target;
-    const targetValue = target.value;
-    const name = target.name;
-
-    // This is needed for react identify which form the user is typing.
-    this.setState({
-      [name]: targetValue,
-    });
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.questions !== nextState.questions) {
+      return true;
+    }
+    return false;
   }
 
-  // This function is responsible for handling changes in the enable switch
-  handleEnableChange() {
-    this.setState({
-      enable: !this.state.enable,
-    });
+  setQuestion(question) {
+    const questions = this.state.questions;
+    questions.push(question);
+    this.setState({ /*  listName, listDescription, enable,*/questions });
   }
-
+  /*
   // This function tries to send the data in state to the database
   sendToDatabase(event) {
     console.warn('Sending to database...');
 
-    /** If the data in state does not match with the List Schema, it will raise
-    *   an error.
-    */
     LISTSDB.insert(this.state, (error, result) => {
       alert('Verifique se todos os campos foram preenchidos corretamente' +
         ', por favor.');
@@ -63,6 +52,7 @@ class ListCreator extends Component {
     // The default action for the event will not be triggered.
     event.preventDefault();
   }
+  */
 
   render() {
     return (
@@ -104,7 +94,7 @@ class ListCreator extends Component {
         </div>
         <br />
 
-        <QuestionCreator />
+        <QuestionCreator setQuestion={this.setQuestion} />
 
         <div className="center-align">
           <button className="waves-effect waves-light btn" onClick={this.sendToDatabase}>
@@ -121,13 +111,4 @@ class ListCreator extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    listName: state.listName,
-    listDescription: state.listDescription,
-    enable: state.enable,
-    questions: state.questions,
-  };
-}
-
-export default connect(mapStateToProps)(ListCreator);
+export default ListCreator;
