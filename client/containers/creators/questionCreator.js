@@ -49,8 +49,9 @@ class QuestionCreator extends Component {
 
     const description = this.questionDescription.value.trim();
     this.setState({ description });
+    const question = { description, alternative: this.state.alternatives };
     this.questionDescription.value = '';
-    this.props.setQuestion(this.state);
+    this.props.setQuestion(question);
   }
 
 

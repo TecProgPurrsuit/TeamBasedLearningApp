@@ -47,7 +47,17 @@ class ListCreator extends Component {
   sendToDatabase(event) {
     console.warn('Sending to database...');
 
-    LISTSDB.insert(this.state, (error, result) => {
+    const listName = this.listName.value.trim();
+    this.listName.value = '';
+    const listDescription = this.listDescription.value.trim();
+    this.listDescription.value = '';
+    const enable = this.enable.checked;
+    this.enable.checked = false;
+    this.setState({ listName, listDescription, enable });
+
+    const list = { listName, listDescription, enable, questions: this.state.questions };
+
+    LISTSDB.insert(list, (error, result) => {
       // info about what went wrong
       if (error) console.warn(error);
       // the _id of new object if successful
@@ -55,11 +65,6 @@ class ListCreator extends Component {
       // alert('Verifique se todos os campos foram preenchidos corretamente, por favor.');
       // console.warn('Data did not pass on schema validation...');
     });
-
-    /** If the data in state does not match with the List Schema, it will raise
-    *   an error.
-    */
-    Meteor.call('listsCreator.insert', this.state);
 
     // The default action for the event will not be triggered.
     event.preventDefault();
@@ -74,35 +79,33 @@ class ListCreator extends Component {
           <label htmlFor="listTitle">Título da lista:</label>
           <input
             id="listTitle"
-            type="text" value={this.state.listName}
-            name="listName"
-            onChange={this.handleChange}
+            type="text"
+            ref={(input) => { this.listName = input; }}
             className="inputForm"
           />
 
           <label htmlFor="listDescription">Descrição da lista:</label>
           <input
             id="listDescription"
-            type="text" value={this.state.listDescription}
-            name="listDescription"
-            onChange={this.handleChange}
+            type="text"
+            ref={(input) => { this.listDescription = input; }}
             className="inputForm"
           />
         </form>
 
         <div className="switch">
-          <label htmlFor="enableSwitch">
+          <label htmlFor="enable">
             Não disponível
             <input
+              id="enable"
               type="checkbox"
-              name="enable"
-              onChange={this.handleEnableChange}
-              checked={this.state.enable}
+              ref={(input) => { this.enable = input; }}
             />
             <span className="lever" />
             Disponível
           </label>
         </div>
+
         <br />
 
         <QuestionCreator setQuestion={this.setQuestion} />
