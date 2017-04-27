@@ -7,16 +7,22 @@
 */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AlternativeCreator extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   handleSubmit(event) {
     event.preventDefault();
     const alternativeDescription = this.alternativeDescription.value.trim();
-    console.log(alternativeDescription);
+    // console.log(alternativeDescription);
 
     const alternativePoints = this.alternativePoints.value;
-    console.log(alternativePoints);
+    // console.log(alternativePoints);
 
     let alternative = true;
     if (alternativePoints) {
@@ -28,9 +34,10 @@ class AlternativeCreator extends Component {
     const alternativeObject = {
       alternativeDescription, alternativePoints, alternative,
     };
-    console.log(alternativeObject);
+    // console.log(alternativeObject);
     this.props.setQuestionAlternative(alternativeObject);
     this.alternativeDescription.value = '';
+    /* global $, jQuery*/
     $('.collapsible').collapsible('close', 0);
   }
 
@@ -43,13 +50,13 @@ class AlternativeCreator extends Component {
 
             <div className="collapsible-body">
 
-              <form id="alternativeForm" onSubmit={this.handleSubmit.bind(this)}>
+              <form id="alternativeForm" onSubmit={this.handleSubmit}>
                 <label htmlFor="alternativeDescription">Descrição</label>
-                <input id="alternativeDescription" type="text" ref={(input) => this.alternativeDescription = input} placeholder="Digite aqui" />
+                <input id="alternativeDescription" type="text" ref={(input) => { this.alternativeDescription = input; }} placeholder="Digite aqui" />
                 <div>
                   <div className="left-align">
-                  <label htmlFor="alternativePoints">Pontos:</label>
-                  <input id="alternativePoints" type="number" ref={(input) => this.alternativePoints = input} min="0" max="4" />
+                    <label htmlFor="alternativePoints">Pontos:</label>
+                    <input id="alternativePoints" type="number" ref={(input) => { this.alternativePoints = input; }} min="0" max="4" />
                   </div>
                   <div className="right-align">
                     <br />
@@ -81,5 +88,9 @@ class AlternativeCreator extends Component {
     );
   }
 }
+
+AlternativeCreator.propTypes = {
+  setQuestionAlternative: PropTypes.func.isRequired,
+};
 
 export default AlternativeCreator;

@@ -11,6 +11,15 @@ import AlternativeCreator from './alternativeCreator';
 
 class QuestionCreator extends Component {
 
+  static openQuestionModal() {
+    /* global $, jQuery*/
+    $(document).ready(() => {
+      // the data-target of .modal-trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal();
+      $('.modal').modal('open');
+    });
+  }
+
   constructor(props) {
     super(props);
     this.state = { description: ' ', alternatives: [] };
@@ -30,13 +39,6 @@ class QuestionCreator extends Component {
     this.setState({ alternatives: alternativesArray });
   }
 
-  openQuestionModal() {
-    $(document).ready(() => {
-      // the data-target of .modal-trigger must specify the modal ID that wants to be triggered
-      $('.modal').modal();
-      $('.modal').modal('open');
-    });
-  }
 
   render() {
     return (
