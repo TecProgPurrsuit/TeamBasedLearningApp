@@ -11,12 +11,34 @@ import AlternativeCreator from './alternativeCreator';
 
 class QuestionCreator extends Component {
 
-  openQuestionModal() {
+  static openQuestionModal() {
+    /* global $, jQuery*/
     $(document).ready(() => {
       // the data-target of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
+      $('.modal').modal('open');
     });
   }
+
+  constructor(props) {
+    super(props);
+    this.state = { description: ' ', alternatives: [] };
+    this.setQuestionAlternative = this.setQuestionAlternative.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.alternatives !== nextState.alternatives) {
+      return true;
+    }
+    return false;
+  }
+
+  setQuestionAlternative(questionAlternative) {
+    const alternativesArray = this.state.alternatives.slice();
+    alternativesArray.push(questionAlternative);
+    this.setState({ alternatives: alternativesArray });
+  }
+
 
   render() {
     return (
@@ -52,7 +74,7 @@ class QuestionCreator extends Component {
               <input id="questionDescription" type="text" placeholder="Digite aqui" />
             </form>
 
-            <AlternativeCreator />
+            <AlternativeCreator setQuestionAlternative={this.setQuestionAlternative} />
 
           </div>
 

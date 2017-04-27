@@ -28,6 +28,7 @@ class ListCreator extends Component {
     this.sendToDatabase = this.sendToDatabase.bind(this);
   }
 
+  // This function is responsible for handling changes in input forms
   handleChange(event) {
     const target = event.target;
     const targetValue = target.value;
@@ -39,12 +40,14 @@ class ListCreator extends Component {
     });
   }
 
+  // This function is responsible for handling changes in the enable switch
   handleEnableChange() {
     this.setState({
       enable: !this.state.enable,
     });
   }
 
+  // This function tries to send the data in state to the database
   sendToDatabase(event) {
     console.warn('Sending to database...');
 
@@ -54,9 +57,8 @@ class ListCreator extends Component {
     LISTSDB.insert(this.state, (error, result) => {
       alert('Verifique se todos os campos foram preenchidos corretamente' +
         ', por favor.');
+      console.warn('Data did not pass on schema validation...');
     });
-
-    console.warn('Data did not pass on schema validation...');
 
     // The default action for the event will not be triggered.
     event.preventDefault();
@@ -88,7 +90,7 @@ class ListCreator extends Component {
         </form>
 
         <div className="switch">
-          <label>
+          <label htmlFor="enableSwitch">
             Não disponível
             <input
               type="checkbox"
