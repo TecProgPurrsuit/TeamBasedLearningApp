@@ -8,9 +8,12 @@
 */
 
 import React, { Component } from 'react';
+
+import Meteor from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
+
 
 require('./style/listCreatorStyle.css');
 
@@ -23,40 +26,45 @@ class ListCreator extends Component {
       questions: [],
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleEnableChange = this.handleEnableChange.bind(this);
+    this.setQuestion = this.setQuestion.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
-    const targetValue = target.value;
-    const name = target.name;
-
-    // This is needed for react identify which form the user is typing.
-    this.setState({
-      [name]: targetValue,
-    });
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.questions !== nextState.questions) {
+      return true;
+    }
+    return false;
   }
 
-  handleEnableChange() {
-    this.setState({
-      enable: !this.state.enable,
-    });
+  setQuestion(question) {
+    const questions = this.state.questions;
+    questions.push(question);
+    this.setState({ /*  listName, listDescription, enable,*/questions });
   }
 
+  // This function tries to send the data in state to the database
   sendToDatabase(event) {
     console.warn('Sending to database...');
 
-    /** If the data in state does not match with the List Schema, it will raise
-    *   an error.
-    */
-    LISTSDB.insert(this.state, (error, result) => {
-      alert('Verifique se todos os campos foram preenchidos corretamente' +
-        ', por favor.');
-    });
+    const listName = this.listName.value.trim();
+    this.listName.value = '';
+    const listDescription = this.listDescription.value.trim();
+    this.listDescription.value = '';
+    const enable = this.enable.checked;
+    this.enable.checked = false;
+    this.setState({ listName, listDescription, enable });
 
-    console.warn('Data did not pass on schema validation...');
+    const list = { listName, listDescription, enable, questions: this.state.questions };
+
+    LISTSDB.insert(list, (error, result) => {
+      // info about what went wrong
+      if (error) console.warn(error);
+      // the _id of new object if successful
+      if (result) console.warn(result);
+      // alert('Verifique se todos os campos foram preenchidos corretamente, por favor.');
+      // console.warn('Data did not pass on schema validation...');
+    });
 
     // The default action for the event will not be triggered.
     event.preventDefault();
@@ -71,38 +79,36 @@ class ListCreator extends Component {
           <label htmlFor="listTitle">Título da lista:</label>
           <input
             id="listTitle"
-            type="text" value={this.state.listName}
-            name="listName"
-            onChange={this.handleChange}
+            type="text"
+            ref={(input) => { this.listName = input; }}
             className="inputForm"
           />
 
           <label htmlFor="listDescription">Descrição da lista:</label>
           <input
             id="listDescription"
-            type="text" value={this.state.listDescription}
-            name="listDescription"
-            onChange={this.handleChange}
+            type="text"
+            ref={(input) => { this.listDescription = input; }}
             className="inputForm"
           />
         </form>
 
         <div className="switch">
-          <label>
+          <label htmlFor="enable">
             Não disponível
             <input
+              id="enable"
               type="checkbox"
-              name="enable"
-              onChange={this.handleEnableChange}
-              checked={this.state.enable}
+              ref={(input) => { this.enable = input; }}
             />
             <span className="lever" />
             Disponível
           </label>
         </div>
+
         <br />
 
-        <QuestionCreator />
+        <QuestionCreator setQuestion={this.setQuestion} />
 
         <div className="center-align">
           <button className="waves-effect waves-light btn" onClick={this.sendToDatabase}>
@@ -119,13 +125,4 @@ class ListCreator extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    listName: state.listName,
-    listDescription: state.listDescription,
-    enable: state.enable,
-    questions: state.questions,
-  };
-}
-
-export default connect(mapStateToProps)(ListCreator);
+export default connect()(ListCreator);
