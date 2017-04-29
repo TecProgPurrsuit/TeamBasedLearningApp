@@ -30,6 +30,9 @@ class QuestionCreator extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.questions !== nextProps.questions) {
+      return true;
+    }
     if (this.state.alternatives !== nextState.alternatives) {
       return true;
     }
@@ -52,6 +55,22 @@ class QuestionCreator extends Component {
     this.questionDescription.value = '';
   }
 
+  // Render all the questions which being created on the list creating screen
+  renderQuestions() {
+    const questions = this.props.questions;
+    return questions.map((question, index) => {
+      return (
+        // Verify if the question.description is a secure props key
+        <li key={question.description} className="collection-item">
+          <div>
+            Questão #{index + 1}
+            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
+          </div>
+        </li>
+      );
+    });
+  }
 
   render() {
     return (
@@ -70,13 +89,7 @@ class QuestionCreator extends Component {
           <li className="collection-header">
             Questões
           </li>
-          <li className="collection-item">
-            <div>
-              01.
-              <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
-              <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
-            </div>
-          </li>
+          {this.renderQuestions()}
         </ul>
 
         <div id="questionModal" className="modal">
@@ -87,7 +100,10 @@ class QuestionCreator extends Component {
               <input id="questionDescription" type="text" ref={(input) => { this.questionDescription = input; }} placeholder="Digite aqui" />
             </form>
 
-            <AlternativeCreator setQuestionAlternative={this.setQuestionAlternative} />
+            <AlternativeCreator
+              alternatives={this.state.alternatives}
+              setQuestionAlternative={this.setQuestionAlternative}
+            />
 
           </div>
 
@@ -105,6 +121,7 @@ class QuestionCreator extends Component {
 
 QuestionCreator.propTypes = {
   setQuestion: PropTypes.func.isRequired,
+  questions: PropTypes.array.isRequired,
 };
 
 export default QuestionCreator;

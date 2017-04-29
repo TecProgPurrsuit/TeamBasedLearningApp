@@ -101,7 +101,7 @@ class ListCreator extends Component {
 
         <br />
 
-        <QuestionCreator setQuestion={this.setQuestion} />
+        <QuestionCreator questions={this.state.questions} setQuestion={this.setQuestion} />
 
         <div className="center-align">
           <button className="waves-effect waves-light btn" onClick={this.sendToDatabase}>

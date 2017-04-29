@@ -39,6 +39,23 @@ class AlternativeCreator extends Component {
     $('.collapsible').collapsible('close', 0);
   }
 
+  // Render all the alternatives which being created on the question creating modal
+  renderAlternatives() {
+    const alternatives = this.props.alternatives;
+    return alternatives.map((alternative, index) => {
+      return (
+        // Verify if the alternative.description is a secure props key
+        <li key={alternative.description} className="collection-item">
+          <div>
+            Alternativa #{index + 1}
+            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
+          </div>
+        </li>
+      );
+    });
+  }
+
   render() {
     return (
       <div>
@@ -79,16 +96,7 @@ class AlternativeCreator extends Component {
           <li className="collection-header center">
             Alternativas
           </li>
-          <li className="collection-item">
-            a.
-            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
-            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
-          </li>
-          <li className="collection-item">
-            b.
-            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
-            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
-          </li>
+          {this.renderAlternatives()}
         </ul>
       </div>
     );
@@ -97,6 +105,7 @@ class AlternativeCreator extends Component {
 
 AlternativeCreator.propTypes = {
   setQuestionAlternative: PropTypes.func.isRequired,
+  alternatives: PropTypes.array.isRequired,
 };
 
 export default AlternativeCreator;
