@@ -1,9 +1,9 @@
-// import { Meteor } from 'meteor/meteor'; -> Needed for Meteor.methods()
+import { Meteor } from 'meteor/meteor';
 import SCHEMASLIST from '../lib/collections/schemas';
 import { LISTSDB } from '../lib/collections/listsCollection';
 
 Meteor.methods({
-  'listsCreator.insert': (newList) => {
+  'lists.insert': (newList) => {
     // Create a validation context needed for isValid()
     const listValidationContext = SCHEMASLIST.List.newContext();
 
@@ -13,9 +13,9 @@ Meteor.methods({
     // If there's a validation error, the server console will show the error
     if (isListValid) {
       LISTSDB.insert(newList);
-      console.warn('listCreator.insert - Ok.');
+      console.warn('lists.insert - Ok.');
     } else {
-      console.warn('listCreator.insert - Validation Failed.');
+      console.warn('lists.insert - Validation Failed.');
     }
   },
 });

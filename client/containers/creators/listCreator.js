@@ -8,11 +8,10 @@
 */
 
 import React, { Component } from 'react';
-
-import Meteor from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
-import { LISTSDB } from '../../../lib/collections/listsCollection';
 import QuestionCreator from './questionCreator';
+import SCHEMASLIST from '../../../lib/collections/schemas';
 
 
 require('./style/listCreatorStyle.css');
@@ -20,11 +19,7 @@ require('./style/listCreatorStyle.css');
 class ListCreator extends Component {
   constructor(props) {
     super(props);
-    this.state = { listName: '',
-      listDescription: '',
-      enable: false,
-      questions: [],
-    };
+    this.state = { questions: [] };
 
     this.setQuestion = this.setQuestion.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
@@ -40,34 +35,32 @@ class ListCreator extends Component {
   setQuestion(question) {
     const questions = this.state.questions;
     questions.push(question);
-    this.setState({ /*  listName, listDescription, enable,*/questions });
+    this.setState({ questions });
   }
 
   // This function tries to send the data in state to the database
   sendToDatabase(event) {
+    // The default action for the event will not be triggered.
+    event.preventDefault();
+
     console.warn('Sending to database...');
 
-    const listName = this.listName.value.trim();
+    const title = this.listName.value.trim();
     this.listName.value = '';
-    const listDescription = this.listDescription.value.trim();
+    const description = this.listDescription.value.trim();
     this.listDescription.value = '';
     const enable = this.enable.checked;
     this.enable.checked = false;
-    this.setState({ listName, listDescription, enable });
 
-    const list = { listName, listDescription, enable, questions: this.state.questions };
+    const list = { title, description, enable, questions: this.state.questions, closed: false };
 
-    LISTSDB.insert(list, (error, result) => {
-      // info about what went wrong
-      if (error) console.warn(error);
-      // the _id of new object if successful
-      if (result) console.warn(result);
-      // alert('Verifique se todos os campos foram preenchidos corretamente, por favor.');
-      // console.warn('Data did not pass on schema validation...');
-    });
+    // Check if the inputs are in accordance with the lists Schema
+    SCHEMASLIST.List.validate(list);
 
-    // The default action for the event will not be triggered.
-    event.preventDefault();
+    // Insert the list object in database through Meteor Methods
+    Meteor.call('lists.insert', list);
+
+    this.setState({ questions: [] });
   }
 
   render() {

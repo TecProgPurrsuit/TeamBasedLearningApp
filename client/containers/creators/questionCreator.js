@@ -24,15 +24,13 @@ class QuestionCreator extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { description: ' ', alternatives: [] };
+    this.state = { alternatives: [] };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setQuestionAlternative = this.setQuestionAlternative.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.alternatives !== nextState.alternatives) {
-      return true;
-    } else if (this.state.description !== nextState.description) {
       return true;
     }
     return false;
@@ -48,10 +46,10 @@ class QuestionCreator extends Component {
     event.preventDefault();
 
     const description = this.questionDescription.value.trim();
-    this.setState({ description });
-    const question = { description, alternative: this.state.alternatives };
-    this.questionDescription.value = '';
+    const question = { description, alternatives: this.state.alternatives };
     this.props.setQuestion(question);
+    this.setState({ alternatives: [] });
+    this.questionDescription.value = '';
   }
 
 

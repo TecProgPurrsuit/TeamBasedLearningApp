@@ -18,25 +18,23 @@ class AlternativeCreator extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const alternativeDescription = this.alternativeDescription.value.trim();
-    // console.log(alternativeDescription);
 
-    const alternativePoints = this.alternativePoints.value;
-    // console.log(alternativePoints);
-
-    let alternative = true;
-    if (alternativePoints) {
-      alternative = true;
+    let alternativePoints;
+    if (this.correct.checked) {
+      alternativePoints = 4;
     } else {
-      alternative = false;
+      alternativePoints = 0;
     }
 
-    const alternativeObject = {
-      alternativeDescription, alternativePoints, alternative,
+    const alternative = {
+      alternativeDescription, alternativePoints,
     };
-    // console.log(alternativeObject);
-    this.props.setQuestionAlternative(alternativeObject);
+
+    this.props.setQuestionAlternative(alternative);
     this.alternativeDescription.value = '';
+    this.correct.checked = false;
     /* global $, jQuery*/
     $('.collapsible').collapsible('close', 0);
   }
@@ -54,9 +52,17 @@ class AlternativeCreator extends Component {
                 <label htmlFor="alternativeDescription">Descrição</label>
                 <input id="alternativeDescription" type="text" ref={(input) => { this.alternativeDescription = input; }} placeholder="Digite aqui" />
                 <div>
-                  <div className="left-align">
-                    <label htmlFor="alternativePoints">Pontos:</label>
-                    <input id="alternativePoints" type="number" ref={(input) => { this.alternativePoints = input; }} min="0" max="4" />
+                  <div className="switch">
+                    <label htmlFor="correct">
+                      Incorreta
+                      <input
+                        id="correct"
+                        type="checkbox"
+                        ref={(input) => { this.correct = input; }}
+                      />
+                      <span className="lever" />
+                      Correta
+                    </label>
                   </div>
                   <div className="right-align">
                     <br />
