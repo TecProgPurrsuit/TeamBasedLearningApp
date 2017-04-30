@@ -10,6 +10,7 @@ const FAKELISTS = [{
   // First List
   title: 'Questionário 01',
   description: 'Questionário para a atividade da aula 01.',
+  discipline: 'Requisitos de Software',
   enable: true,
   closed: false,
   questions: [
@@ -62,6 +63,7 @@ const FAKELISTS = [{
   title: 'Questionário 02',
   description: 'Questionário para a atividade da aula 02.',
   enable: true,
+  discipline: 'Requisitos de Software',
   closed: false,
   questions: [
     {
