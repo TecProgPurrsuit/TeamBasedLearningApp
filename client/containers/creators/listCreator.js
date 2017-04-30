@@ -10,9 +10,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionCreator from './questionCreator';
-import SCHEMASLIST from '../../../lib/collections/schemas';
-/* global Meteor comes from Meteor Library*/
-
+// Meteor comes from Meteor Library - No import needed (ESLINT issue)
+/* global Meteor comes from Meteor Library */
 
 require('./style/listCreatorStyle.css');
 
@@ -52,13 +51,14 @@ class ListCreator extends Component {
     const enable = this.enable.checked;
     this.enable.checked = false;
 
-    const list = { title, description, enable, questions: this.state.questions, closed: false };
-
-    // Check if the inputs are in accordance with the lists Schema
-    SCHEMASLIST.List.validate(list);
+    const list = { title,
+      description,
+      enable,
+      questions: this.state.questions,
+      discipline: '' };
 
     // Insert the list object in database through Meteor Methods
-    Meteor.call('lists.insert', list);
+    Meteor.call('lists.validateAndInsert', list);
 
     this.setState({ questions: [] });
   }
