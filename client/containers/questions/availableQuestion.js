@@ -13,12 +13,12 @@ import { connect } from 'react-redux';
 class AvailableQuestion extends Component {
 // This class manages all components of available questions
   renderAvailableQuestions() {
-    const questions = this.props.questionListData;
+    const QUESTIONS = this.props.questionListData;
 
-    var available_questions = [];
-    available_questions = filterAvailableQuestions(questions);
+    let availableQuestions = [];
+    availableQuestions = filterAvailableQuestions(QUESTIONS);
 
-    return available_questions.map((question) => {
+    return availableQuestions.map((question) => {
       return (
         <div className="card available-card-container"key={question.description}>
           <div className="card-content available-card">
@@ -36,14 +36,14 @@ class AvailableQuestion extends Component {
           </div>
           <div className="card-reveal">
             <span className="card-title grey-text text-darken-4"><i className="material-icons right">close</i></span>
-              <div className="card-tabs">
-                <ul className="tabs tabs-fixed-width">
-                  {this.renderTempletCardTabs(question.questions)}
-                </ul>
-              </div>
-              <div className="card-content grey lighten-4">
-                {this.renderTempletTabContent(question.questions)}
-              </div>
+            <div className="card-tabs">
+              <ul className="tabs tabs-fixed-width">
+                {this.renderTempletCardTabs(question.questions)}
+              </ul>
+            </div>
+            <div className="card-content grey lighten-4">
+              {this.renderTempletTabContent(question.questions)}
+            </div>
           </div>
         </div>
 
@@ -60,15 +60,15 @@ class AvailableQuestion extends Component {
     );
   }
 
-  renderIcon(){
-    return(
+  renderIcon() {
+    return (
       <div>Function called</div>
     )
   }
 
   answeredQuestion(props) {
     // This component is used in case the question list has been answered
-    return(
+    return (
       <div className="card-action">
         <a className="activator">Ver respostas certas</a>
       </div>
@@ -77,7 +77,7 @@ class AvailableQuestion extends Component {
 
   unansweredQuestion(props) {
     // This component is used in case the question list was not answered
-    return(
+    return (
       <div className="card-action">
         <a>Responder Questionário</a>
       </div>
@@ -88,7 +88,7 @@ class AvailableQuestion extends Component {
     // This function return a component according to if it's answered or not
     if (question.answered) {
       return <this.answeredQuestion />;
-    }else{
+    } else {
       // nothing to do
     }
     return <this.unansweredQuestion />;
@@ -142,17 +142,17 @@ function mapStateToProps(state) {
   };
 }
 
-function filterAvailableQuestions (allQuestions) {
+function filterAvailableQuestions(allQuestions) {
   // This function separate available question lists from all question lists
-  var available_questions = [];
+  let availableQuestions = [];
 
   allQuestions.map((question) => {
-    if (question.available) {
-      available_questions.push(question);
+    if (question.enable) {
+      availableQuestions.push(question);
     }
   })
 
-  return available_questions;
+  return availableQuestions;
 }
 
 AvailableQuestion.propTypes = {

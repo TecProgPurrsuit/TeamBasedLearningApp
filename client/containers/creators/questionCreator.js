@@ -9,7 +9,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlternativeCreator from './alternativeCreator';
-import AlternativeQuestionList from './alternativeQuestionList';
 
 class QuestionCreator extends Component {
 
@@ -56,6 +55,23 @@ class QuestionCreator extends Component {
     this.questionDescription.value = '';
   }
 
+  // Render all the questions which being created on the list creating screen
+  renderQuestions() {
+    const questions = this.props.questions;
+    return questions.map((question, index) => {
+      return (
+        // Verify if the question.description is a secure props key
+        <li key={question.description} className="collection-item">
+          <div>
+            Questão #{index + 1}
+            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
+          </div>
+        </li>
+      );
+    });
+  }
+
   render() {
     return (
       <div>
@@ -69,10 +85,12 @@ class QuestionCreator extends Component {
           </button>
         </div>
 
-        <AlternativeQuestionList
-          listName={'Questões'}
-          items={this.props.questions}
-        />
+        <ul id="questionList" className="collection with-header">
+          <li className="collection-header">
+            Questões
+          </li>
+          {this.renderQuestions()}
+        </ul>
 
         <div id="questionModal" className="modal">
           <div className="modal-content">
