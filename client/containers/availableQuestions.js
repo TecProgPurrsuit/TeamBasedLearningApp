@@ -9,13 +9,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AvailableQuestionList from './questions/availableQuestionList';
+import AllQuestionList from './questions/allQuestionList';
 
 class AvailableQuestions extends Component {
   // This class return all components container
   render() {
-    return (
-      <AvailableQuestionList />
-    );
+    if(!Meteor.user().profile.is_teacher) {
+      return (
+        <AvailableQuestionList />
+      );
+    } else {
+      return (
+        <AllQuestionList />
+      );
+    }
   }
 }
 
