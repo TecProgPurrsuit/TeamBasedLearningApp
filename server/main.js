@@ -1,6 +1,7 @@
-// import { Meteor } from 'meteor/meteor';
+
 import fakeInitialData from '../lib/collections/fakeListData';
 import { LISTSDB } from '../lib/collections/listsCollection';
+/* global Meteor comes from Meteor Library*/
 
 // This function allows the database to be shown in client side, as long the
 // client calls a subscribe method.

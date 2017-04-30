@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
 import SCHEMASLIST from '../lib/collections/schemas';
 import { LISTSDB } from '../lib/collections/listsCollection';
 
+/* global Meteor comes from Meteor Library*/
 Meteor.methods({
   'lists.insert': (newList) => {
     // Create a validation context needed for isValid()

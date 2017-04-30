@@ -8,10 +8,10 @@
 */
 
 import React, { Component } from 'react';
-import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import QuestionCreator from './questionCreator';
 import SCHEMASLIST from '../../../lib/collections/schemas';
+/* global Meteor comes from Meteor Library*/
 
 
 require('./style/listCreatorStyle.css');
