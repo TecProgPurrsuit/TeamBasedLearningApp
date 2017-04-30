@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlternativeCreator from './alternativeCreator';
+import AlternativeQuestionItem from './alternativeQuestionItem';
 
 class QuestionCreator extends Component {
 
@@ -89,7 +90,10 @@ class QuestionCreator extends Component {
           <li className="collection-header">
             Questões
           </li>
-          {this.renderQuestions()}
+          <AlternativeQuestionItem
+            items={this.props.questions}
+            itemName={'Questão'}
+          />
         </ul>
 
         <div id="questionModal" className="modal">

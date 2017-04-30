@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import AlternativeQuestionItem from './alternativeQuestionItem';
 
 class AlternativeCreator extends Component {
 
@@ -96,7 +97,10 @@ class AlternativeCreator extends Component {
           <li className="collection-header center">
             Alternativas
           </li>
-          {this.renderAlternatives()}
+          <AlternativeQuestionItem
+            items={this.props.alternatives}
+            itemName={'Alternativa'}
+          />
         </ul>
       </div>
     );
