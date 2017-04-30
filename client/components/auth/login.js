@@ -36,7 +36,7 @@ class Login extends Component {
     const registrationNumber = this.state.registration_number;
     const password = this.state.password;
 
-    // Log the user into the system
+    /* global Meteor comes from Meteor library*/
     Meteor.loginWithPassword(registrationNumber, password, (error) => {
       if (!error) {
         this.props.connectUser(Meteor.user());
