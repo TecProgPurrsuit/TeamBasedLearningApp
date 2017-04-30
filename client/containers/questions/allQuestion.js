@@ -1,8 +1,8 @@
 /**
 * This file is responsible for create and organize componets and child
-*   components to show the available questions and templet when needed.
+*   components to show all the questions and templet when needed.
 *
-* @summary Separate components of all available questions list
+* @summary Show all questions list
 *
   @class AvailableQuestion
 */

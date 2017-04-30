@@ -14,15 +14,18 @@ import AllQuestionList from './questions/allQuestionList';
 class AvailableQuestions extends Component {
   // This class return all components container
   render() {
-    if(!Meteor.user().profile.is_teacher) {
+    /* global Meteor come from Meteor Library */
+    const CURRENTUSER = Meteor.user();
+
+    if (!CURRENTUSER.profile.is_teacher) {
       return (
         <AvailableQuestionList />
       );
-    } else {
-      return (
-        <AllQuestionList />
-      );
     }
+
+    return (
+      <AllQuestionList />
+    );
   }
 }
 

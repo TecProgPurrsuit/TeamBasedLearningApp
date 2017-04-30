@@ -108,20 +108,20 @@ class AvailableQuestion extends Component {
     });
   }
 
-  renderTempletCardTabs(questionList){
+  renderTempletCardTabs(questionList) {
     // This component is a tab with all the questions of the available list
     return questionList.map((question) => {
       return (
         <div key={question.id}>
           <li className="tab">
-            <a href={"#"+question.id} className="active">{"Questão: "+ question.id}</a>
+            <a href={'#' + question.id} className="active">{'Questão: ' + question.id}</a>
           </li>
         </div>
       );
     });
   }
 
-  renderTempletTabContent(questionList){
+  renderTempletTabContent(questionList) {
     // This component disposes the content under the tabs
     return questionList.map((question) => {
       return (
@@ -144,15 +144,15 @@ function mapStateToProps(state) {
 
 function filterAvailableQuestions(allQuestions) {
   // This function separate available question lists from all question lists
-  let availableQuestions = [];
+  const AVAIABLEQUESTIONS = [];
 
   allQuestions.map((question) => {
     if (question.enable) {
-      availableQuestions.push(question);
+      AVAIABLEQUESTIONS.push(question);
     }
-  })
+  });
 
-  return availableQuestions;
+  return AVAIABLEQUESTIONS;
 }
 
 AvailableQuestion.propTypes = {
