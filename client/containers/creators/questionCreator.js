@@ -56,23 +56,6 @@ class QuestionCreator extends Component {
     this.questionDescription.value = '';
   }
 
-  // Render all the questions which being created on the list creating screen
-  renderQuestions() {
-    const questions = this.props.questions;
-    return questions.map((question, index) => {
-      return (
-        // Verify if the question.description is a secure props key
-        <li key={question.description} className="collection-item">
-          <div>
-            Questão #{index + 1}
-            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
-            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
-          </div>
-        </li>
-      );
-    });
-  }
-
   render() {
     return (
       <div>
