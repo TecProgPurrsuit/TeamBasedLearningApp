@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlternativeCreator from './alternativeCreator';
-import AlternativeQuestionItem from './alternativeQuestionItem';
+import AlternativeQuestionList from './alternativeQuestionList';
 
 class QuestionCreator extends Component {
 
@@ -69,15 +69,10 @@ class QuestionCreator extends Component {
           </button>
         </div>
 
-        <ul id="questionList" className="collection with-header">
-          <li className="collection-header">
-            Questões
-          </li>
-          <AlternativeQuestionItem
-            items={this.props.questions}
-            itemName={'Questão'}
-          />
-        </ul>
+        <AlternativeQuestionList
+          listName={'Questões'}
+          items={this.props.questions}
+        />
 
         <div id="questionModal" className="modal">
           <div className="modal-content">

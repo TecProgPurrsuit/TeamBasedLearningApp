@@ -26,5 +26,9 @@ class AlternativeQuestionItem extends Component {
   }
 }
 
+AlternativeQuestionItem.propTypes = {
+  items: React.PropTypes.array.isRequired,
+  itemName: React.PropTypes.string.isRequired,
+};
 
 export default AlternativeQuestionItem;
