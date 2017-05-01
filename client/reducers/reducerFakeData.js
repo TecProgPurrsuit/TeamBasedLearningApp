@@ -119,6 +119,29 @@ SCHEMASLIST.List.validate(FAKELISTS[0]);
 SCHEMASLIST.List.validate(FAKELISTS[1]);
 
 // Export the fake list data so other files can acess the data as needed
-export default function () {
+export function allLists() {
   return FAKELISTS;
+}
+
+export function availableLists() {
+  const AVAILABLELISTS = [];
+  FAKELISTS.map((list) => {
+    if (list.enable) {
+      AVAILABLELISTS.push(list);
+    }
+    return undefined;
+  });
+
+  return AVAILABLELISTS;
+}
+
+export function unavailableLists() {
+  const UNAVAILABLELISTS = [];
+  FAKELISTS.map((list) => {
+    if (!list.enable) {
+      UNAVAILABLELISTS.push(list);
+    }
+    return undefined;
+  });
+  return UNAVAILABLELISTS;
 }
