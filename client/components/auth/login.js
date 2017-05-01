@@ -59,7 +59,7 @@ class Login extends Component {
     changedField[input] = event.target.value;
 
     // Checks if the passed value is blank
-    if (event.target.value !== '') {
+    if (event.target.value !== ' ') {
       this.setState(changedField);
     } else {
       console.error("Can't insert blank value");
