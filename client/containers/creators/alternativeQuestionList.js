@@ -15,7 +15,7 @@ class AlternativeQuestionList extends Component {
 
   render() {
     return (
-      <ul id="alternativesList" className="collection">
+      <ul id="alternativesList" className="collection with-header">
         <li className="collection-header center">
           {this.props.listName}
         </li>

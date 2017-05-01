@@ -51,11 +51,15 @@ class ListCreator extends Component {
     const enable = this.enable.checked;
     this.enable.checked = false;
 
+    const disciplineSelect = document.getElementById('disciplineSelect');
+    const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
+
+
     const list = { title,
       description,
       enable,
       questions: this.state.questions,
-      discipline: '' };
+      discipline };
 
     // Insert the list object in database through Meteor Methods
     Meteor.call('lists.validateAndInsert', list);
@@ -85,6 +89,16 @@ class ListCreator extends Component {
             className="inputForm"
           />
         </form>
+
+        <label htmlFor="disciplineLabel">Selecione a disciplina</label>
+        <div className="input-field">
+          <select id="disciplineSelect" className="browser-default">
+            <option value="" disabled selected>-- Disciplina --</option>
+            <option value="Medição e Análise">Medição e Análise</option>
+            <option value="Requisitos de Software">Requisitos de Software</option>
+          </select>
+        </div>
+        <br />
 
         <div className="switch">
           <label htmlFor="enable">
