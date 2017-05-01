@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { connectUser } from '../../actions/index';
 
 class Logout extends Component {
-
+/* global Meteor comes from Meteor Library */
   constructor() {
     super();
     this.state = { message: '', error: false };

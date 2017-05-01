@@ -6,7 +6,7 @@ import CustomMessage from '../customMessage';
 import './authentication.css';
 
 class Register extends Component {
-
+/* global Meteor comes from Meteor Library */
   constructor() {
     super();
     this.state = {
