@@ -39,8 +39,9 @@ Meteor.methods({
     const actualDate = new Date();
     const newList = data;
 
-    // Add to the list a date of creation
+    // Add to the list a date of creation and closed attribute
     newList.createdAt = actualDate;
+    newList.closed = false;
 
     LISTSDB.insert(newList);
     console.warn('lists.insert - Ok.');

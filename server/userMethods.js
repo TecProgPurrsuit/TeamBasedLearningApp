@@ -1,8 +1,8 @@
 /**
-* This file is responsible for creating Meteor Server Methods for lists
+* This file is responsible for creating Meteor Server Methods for user
 * management.
 
-* @summary Lists Meteor methods.
+* @summary User Meteor methods.
 */
 
 /* global Meteor comes from Meteor Library*/
