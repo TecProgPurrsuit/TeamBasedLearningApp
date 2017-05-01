@@ -8,8 +8,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GroupAlternative from './groupAlternative';
-import IndividualAlternative from './individualAlternative';
+import GroupAlternative from '../alternatives/groupAlternative';
+import IndividualAlternative from '../alternatives/individualAlternative';
 
 require('./style/question.css');
 

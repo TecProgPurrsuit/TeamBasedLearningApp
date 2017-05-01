@@ -14,7 +14,7 @@ import { connectUser } from '../../actions/index';
 import './authentication.css';
 
 class Login extends Component {
-
+/* global Meteor comes from Meteor Library */
   componentWillMount() {
     this.state = {
       message: '',

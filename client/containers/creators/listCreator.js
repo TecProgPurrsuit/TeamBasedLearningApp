@@ -10,9 +10,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionCreator from './questionCreator';
-import SCHEMASLIST from '../../../lib/collections/schemas';
-/* global Meteor comes from Meteor Library*/
-
+// Meteor comes from Meteor Library - No import needed (ESLINT issue)
+/* global Meteor comes from Meteor Library */
 
 require('./style/listCreatorStyle.css');
 
@@ -52,13 +51,18 @@ class ListCreator extends Component {
     const enable = this.enable.checked;
     this.enable.checked = false;
 
-    const list = { title, description, enable, questions: this.state.questions, closed: false };
+    const disciplineSelect = document.getElementById('disciplineSelect');
+    const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
 
-    // Check if the inputs are in accordance with the lists Schema
-    SCHEMASLIST.List.validate(list);
+
+    const list = { title,
+      description,
+      enable,
+      questions: this.state.questions,
+      discipline };
 
     // Insert the list object in database through Meteor Methods
-    Meteor.call('lists.insert', list);
+    Meteor.call('lists.validateAndInsert', list);
 
     this.setState({ questions: [] });
   }
@@ -85,6 +89,16 @@ class ListCreator extends Component {
             className="inputForm"
           />
         </form>
+
+        <label htmlFor="disciplineLabel">Selecione a disciplina</label>
+        <div className="input-field">
+          <select id="disciplineSelect" className="browser-default">
+            <option value="" disabled selected>-- Disciplina --</option>
+            <option value="Medição e Análise">Medição e Análise</option>
+            <option value="Requisitos de Software">Requisitos de Software</option>
+          </select>
+        </div>
+        <br />
 
         <div className="switch">
           <label htmlFor="enable">

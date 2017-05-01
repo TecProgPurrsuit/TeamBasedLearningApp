@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import QuestionsReducer from './reducerFakeData';
+import { allLists, availableLists, unavailableLists } from './reducerFakeData';
 import SelectTypeOfAnswer from './reducerSelectTypeOfAnswer';
 import CurrentUserReducer from './reducerCurrentUser';
 
 const rootReducer = combineReducers({
-  questionListData: QuestionsReducer,
+  questionListData: allLists,
+  unavailableListsData: unavailableLists,
+  availableListsData: availableLists,
   typeOfAnswering: SelectTypeOfAnswer,
   currentUser: CurrentUserReducer,
 });
