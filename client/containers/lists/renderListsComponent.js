@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import AllAvailableLists from './available/allAvailableLists';
 import AllLists from './allLists';
 
-class RenderListsComponent extends Component {
-  render() {
-    const CURRENT_USER = this.props.currentUser;
-    if (!CURRENT_USER.profile.is_teacher) {
-      return (
-        <AllAvailableLists />
-      );
-    }
+function RenderListsComponent(props) {
+  const CURRENT_USER = props.currentUser;
+  if (!CURRENT_USER.profile.is_teacher) {
     return (
-      <AllLists />
+      <AllAvailableLists />
     );
   }
+  return (
+    <AllLists />
+  );
 }
 
 function mapStateToProps(state) {

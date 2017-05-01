@@ -129,6 +129,7 @@ export function availableLists() {
     if (list.enable) {
       AVAILABLELISTS.push(list);
     }
+    return undefined;
   });
 
   return AVAILABLELISTS;
@@ -140,6 +141,7 @@ export function unavailableLists() {
     if (!list.enable) {
       UNAVAILABLELISTS.push(list);
     }
+    return undefined;
   });
   return UNAVAILABLELISTS;
 }
