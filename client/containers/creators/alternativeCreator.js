@@ -14,7 +14,20 @@ class AlternativeCreator extends Component {
 
   constructor(props) {
     super(props);
+    this.state = { correctSwitchDisabler: false };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  /* if the alternatives props change, verify if there is some correct alternative,
+  if yes disable the correct switch */
+  componentWillReceiveProps(nextProps) {
+    if (this.props.alternatives !== nextProps.alternatives) {
+      if (this.props.checkForAnyCorrectAlternative()) {
+        this.setState({ correctSwitchDisabler: true });
+      } else {
+        this.setState({ correctSwitchDisabler: false });
+      }
+    }
   }
 
   handleSubmit(event) {
@@ -35,6 +48,7 @@ class AlternativeCreator extends Component {
 
     this.props.setQuestionAlternative(alternative);
     this.alternativeDescription.value = '';
+    this.setState({ correctSwitchDisabler: false });
     this.correct.checked = false;
     /* global $, jQuery*/
     $('.collapsible').collapsible('close', 0);
@@ -54,15 +68,24 @@ class AlternativeCreator extends Component {
                 <input id="alternativeDescription" type="text" ref={(input) => { this.alternativeDescription = input; }} placeholder="Digite aqui" />
                 <div>
                   <div className="switch">
-                    <label htmlFor="correct">
+                    <label htmlFor="correctSwitch">
                       Incorreta
                       <input
-                        id="correct"
+                        id="correctSwitch"
+                        disabled={this.state.correctSwitchDisabler}
                         type="checkbox"
                         ref={(input) => { this.correct = input; }}
                       />
                       <span className="lever" />
                       Correta
+                    </label>
+                    <br />
+                    <label
+                      id="correctSwitchDisabled"
+                      htmlFor="correctSwitch"
+                      hidden={!this.state.correctSwitchDisabler}
+                    >
+                        Já existe uma alternativa correta!
                     </label>
                   </div>
                   <div className="right-align">
@@ -87,6 +110,7 @@ class AlternativeCreator extends Component {
 AlternativeCreator.propTypes = {
   setQuestionAlternative: PropTypes.func.isRequired,
   alternatives: PropTypes.array.isRequired,
+  checkForAnyCorrectAlternative: PropTypes.func.isRequired,
 };
 
 export default AlternativeCreator;
