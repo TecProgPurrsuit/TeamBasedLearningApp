@@ -27,6 +27,7 @@ class QuestionCreator extends Component {
     this.state = { alternatives: [] };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setQuestionAlternative = this.setQuestionAlternative.bind(this);
+    this.checkForAnyCorrectAlternative = this.checkForAnyCorrectAlternative.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -50,9 +51,34 @@ class QuestionCreator extends Component {
 
     const description = this.questionDescription.value.trim();
     const question = { description, alternatives: this.state.alternatives };
-    this.props.setQuestion(question);
-    this.setState({ alternatives: [] });
-    this.questionDescription.value = '';
+
+    /* if there isn't any correct alternatives or if the number of alternatives
+     created is less than 2, alert the user */
+    if (!this.checkForAnyCorrectAlternative()) {
+      // alert user (create some way of alert here)
+      // alert('não há nenhuma alternativa correta');
+    } else if (this.state.alternatives.length < 2) {
+      // alert user (create some way of alert here)
+      // alert('é necessário ao menos 2 ou mais alternativas');
+    } else {
+      // if everything is ok, create the question
+      this.props.setQuestion(question);
+      this.setState({ alternatives: [] });
+      this.questionDescription.value = '';
+      /* global $, jQuery*/
+      $('#questionModal').modal('close');
+    }
+  }
+
+  checkForAnyCorrectAlternative() {
+    let anyCorrect = false;
+    this.state.alternatives.map((alternative) => {
+      if (alternative.alternativePoints > 0) {
+        anyCorrect = true;
+      }
+      return 0;
+    });
+    return anyCorrect;
   }
 
   // Render all the questions which being created on the list creating screen
@@ -92,7 +118,7 @@ class QuestionCreator extends Component {
           {this.renderQuestions()}
         </ul>
 
-        <div id="questionModal" className="modal">
+        <div id="questionModal" className="modal modal-fixed-footer">
           <div className="modal-content">
             <h4>Adicionar Questão</h4>
             <form>
@@ -102,6 +128,7 @@ class QuestionCreator extends Component {
 
             <AlternativeCreator
               alternatives={this.state.alternatives}
+              checkForAnyCorrectAlternative={this.checkForAnyCorrectAlternative}
               setQuestionAlternative={this.setQuestionAlternative}
             />
 
@@ -111,7 +138,7 @@ class QuestionCreator extends Component {
 
           <div id="modalFooter" className="modal-footer">
             <button className="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</button>
-            <button onClick={this.handleSubmit} className="modal-action modal-close waves-effect waves-green btn-flat">Adicionar</button>
+            <button onClick={this.handleSubmit} className="modal-action waves-effect waves-green btn-flat">Adicionar</button>
           </div>
         </div>
       </div>
