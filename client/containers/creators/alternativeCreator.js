@@ -8,7 +8,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AlternativeQuestionList from './alternativeQuestionList';
 
 class AlternativeCreator extends Component {
 
@@ -52,6 +51,23 @@ class AlternativeCreator extends Component {
     this.correct.checked = false;
     /* global $, jQuery*/
     $('.collapsible').collapsible('close', 0);
+  }
+
+  // Render all the alternatives which being created on the question creating modal
+  renderAlternatives() {
+    const alternatives = this.props.alternatives;
+    return alternatives.map((alternative, index) => {
+      return (
+        // Verify if the alternative.description is a secure props key
+        <li key={alternative.description} className="collection-item">
+          <div>
+            Alternativa #{index + 1}
+            <a href="#!" className="secondary-content"><i className="material-icons">delete</i></a>
+            <a href="#!" className="secondary-content"><i className="material-icons">edit</i>&ensp;</a>
+          </div>
+        </li>
+      );
+    });
   }
 
   render() {
@@ -98,10 +114,13 @@ class AlternativeCreator extends Component {
             </div>
           </li>
         </ul>
-        <AlternativeQuestionList
-          listName={'Alternativas'}
-          items={this.props.alternatives}
-        />
+
+        <ul id="alternativesList" className="collection">
+          <li className="collection-header center">
+            Alternativas
+          </li>
+          {this.renderAlternatives()}
+        </ul>
       </div>
     );
   }
