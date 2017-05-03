@@ -18,6 +18,7 @@ class Logout extends Component {
   }
 
   authenticationLogout() {
+    /* global Meteor comes from Meteor library*/
     Meteor.logout((error) => {
       if (!error) {
         this.props.connectUser(Meteor.user());

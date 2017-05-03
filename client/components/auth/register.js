@@ -47,7 +47,7 @@ class Register extends Component {
       },
     };
 
-    // Function to create a user
+    /* global Meteor comes from Meteor library*/
     Meteor.call('userInsert', user, (error) => {
       if (!error) {
         this.setState({ message: 'Successfully created!' });
