@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class TeacherListTail extends Component {
-  render() {
-    return (
-      <div className="card-action">
-        <a className="activator">Ativar/Desativar lista</a>
-      </div>
-    );
-  }
+function TeacherListTail() {
+  return (
+    <div className="card-action">
+      <a className="activator">Ativar/Desativar lista</a>
+    </div>
+  );
 }
 
 TeacherListTail.propTypes = {
