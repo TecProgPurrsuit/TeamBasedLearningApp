@@ -10,6 +10,7 @@ class AllAvailableLists extends Component {
       return (
         <AvailableListItem
           list={list}
+          currentUser={this.props.currentUser}
           key={list.title}
         />
       );
@@ -33,11 +34,13 @@ class AllAvailableLists extends Component {
 function mapStateToProps(state) {
   return {
     availableListsData: state.availableListsData,
+    currentUser: state.currentUser,
   };
 }
 
 AllAvailableLists.propTypes = {
   availableListsData: React.PropTypes.array.isRequired,
+  currentUser: React.PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(AllAvailableLists);
