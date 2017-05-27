@@ -48,10 +48,16 @@ class UpdateProfile extends Component {
     };
 
     /* global Meteor comes from Meteor library*/
-    Meteor.call('userInsert', user, (error) => {
+    Meteor.call('userUpdate', user, (error) => {
       if (!error) {
+        console.log(user);
+        Meteor.users.update(Meteor.userId(), {
+          $set: {
+            profile : user.profile
+          }
+        });
         this.setState({ message: 'Successfully created!' });
-        browserHistory.push('/login');
+        browserHistory.push('/');
       } else {
         this.setState({
           message: error.reason,

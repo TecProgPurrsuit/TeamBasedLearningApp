@@ -20,4 +20,19 @@ Meteor.methods({
       console.log("Usuário já existe!")
     }
   },
+
+  'userUpdate': (user) => {
+    check(user, {
+      username: String,
+      password: String,
+      profile: {
+        name: String,
+        email: String,
+        group: String,
+        name_of_class: String,
+        is_teacher: Boolean
+      }
+    });
+  },
+
 })
