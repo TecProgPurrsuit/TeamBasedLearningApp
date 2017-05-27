@@ -14,6 +14,7 @@ import RenderListsComponent from './containers/lists/renderListsComponent';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
 import ListCreator from './containers/creators/listCreator';
+import UpdateProfile from './components/auth/updateProfile';
 
 export default (
   <Route path="/" component={App}>
@@ -23,5 +24,6 @@ export default (
     <Route path="/create-list" component={ListCreator} />
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
+    <Route path="/update-profile" component={UpdateProfile} />
   </Route>
 );

@@ -22,14 +22,18 @@ class NavBar extends Component {
   render() {
     let welcome = '';
     let authentication = null;
+    let updateProfileButton = null;
 
     // Verify that the user is logged in and return the Login or Logout button
     if (this.isAuthenticated()) {
       welcome = `Bem vindo ${this.props.currentUser.profile.name}`;
       authentication = <Logout />;
+      updateProfileButton =
+        <li><Link to="/update-profile">Atualizar Perfil</Link></li>;
     } else {
       welcome = '';
       authentication = <li><Link to="/login">Login</Link></li>;
+      updateProfileButton = null;
     }
 
     return (
@@ -69,6 +73,7 @@ class NavBar extends Component {
                 </Link>
               </li>
               { authentication }
+              { updateProfileButton }
             </ul>
             <ul className="side-nav" id="mobile-demo">
               <li><Link to="/group-simulator">Prova em grupo</Link></li>
