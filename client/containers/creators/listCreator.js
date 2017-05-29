@@ -44,27 +44,36 @@ class ListCreator extends Component {
 
     console.warn('Sending to database...');
 
-    const title = this.listName.value.trim();
+    // check for any question, if there is any one save the list
+    if (this.state.questions.length !== 0) {
+      const title = this.listName.value.trim();
+      const description = this.listDescription.value.trim();
+      const enable = this.enable.checked;
+      const disciplineSelect = document.getElementById('disciplineSelect');
+      const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
+
+      const list = { title,
+        description,
+        enable,
+        questions: this.state.questions,
+        discipline };
+
+      // Insert the list object in database through Meteor Methods
+      Meteor.call('lists.validateAndInsert', list);
+
+      // reset the fields and the questions state
+      this.setState({ questions: [] });
+      this.resetListFields();
+    } else {
+    // Needed custom alert();
+      console.warn('sendToDatabase: No questions were given.');
+    }
+  }
+
+  resetListFields() {
     this.listName.value = '';
-    const description = this.listDescription.value.trim();
     this.listDescription.value = '';
-    const enable = this.enable.checked;
     this.enable.checked = false;
-
-    const disciplineSelect = document.getElementById('disciplineSelect');
-    const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
-
-
-    const list = { title,
-      description,
-      enable,
-      questions: this.state.questions,
-      discipline };
-
-    // Insert the list object in database through Meteor Methods
-    Meteor.call('lists.validateAndInsert', list);
-
-    this.setState({ questions: [] });
   }
 
   render() {
