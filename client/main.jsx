@@ -7,6 +7,8 @@
 */
 
 import React from 'react';
+import promise from 'redux-promise';
+import thunk from 'redux-thunk';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -16,7 +18,9 @@ import reducers from './reducers';
 import { Meteor } from 'meteor/meteor';
 
 
-const CREATESTOREWITHMIDDLEWARE = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(
+  promise, thunk,
+)(createStore);
 
 
 Meteor.startup(() => {
@@ -24,7 +28,7 @@ Meteor.startup(() => {
   Meteor.subscribe('Lists');
 
   render(
-    <Provider store={CREATESTOREWITHMIDDLEWARE(reducers)}>
+    <Provider store={createStoreWithMiddleware(reducers)}>
       <Router history={browserHistory} routes={routes} />
     </Provider>
     , document.getElementById('container'));
