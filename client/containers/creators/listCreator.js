@@ -1,7 +1,7 @@
 /**
 * This file is responsible for rendering the create list page.
 *
-* @summary Conteiner for creating lists.
+* @summary Container for creating lists.
 *
 * @link /create-list
 * @class ListCreator
@@ -18,13 +18,15 @@ require('./style/listCreatorStyle.css');
 class ListCreator extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: ' ',
+    this.state = {
+      title: ' ',
       description: ' ',
       discipline: ' ',
       enabled: false,
       questions: [],
       valid: false,
-      resetInput: false };
+      resetInput: false,
+    };
 
     this.setQuestion = this.setQuestion.bind(this);
     this.setTitle = this.setTitle.bind(this);
@@ -62,8 +64,8 @@ class ListCreator extends Component {
   sendToDatabase(event) {
     // The default action for the event will not be triggered.
     event.preventDefault();
-
-    const listIsValid = (this.state.valid && (this.state.questions.length !== 0));
+    const EMPTY = 0;
+    const listIsValid = (this.state.valid && (this.state.questions.length !== EMPTY));
 
     // check for any question, if there is any one save the list
     if (listIsValid) {
@@ -73,11 +75,13 @@ class ListCreator extends Component {
       const disciplineSelect = document.getElementById('disciplineSelect');
       const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
 
-      const list = { title,
+      const list = {
+        title,
         description,
         enable,
         questions: this.state.questions,
-        discipline };
+        discipline,
+      };
 
       // Insert the list object in database through Meteor Methods
       /* global Meteor */
@@ -98,7 +102,8 @@ class ListCreator extends Component {
   }
 
   resetListFields() {
-    this.setState({ title: ' ',
+    this.setState({
+      title: ' ',
       description: ' ',
       discipline: ' ',
       enabled: false,
