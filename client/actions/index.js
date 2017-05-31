@@ -18,7 +18,7 @@ Meteor.callPromise('lists.getAll');
       type: FETCH_LISTS,
       payload: LISTSDATA,
     });
-  }
+  };
 }
 
 export function selectGroupAnswering() {

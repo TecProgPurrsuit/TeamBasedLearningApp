@@ -30,9 +30,10 @@ class Question extends Component {
           </div>
         );
       });
-    } else {
-      // do nothing
     }
+    return (
+      <div>Questions render error</div>
+    );
   }
 
 

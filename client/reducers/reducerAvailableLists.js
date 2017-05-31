@@ -12,9 +12,8 @@ export default function (state = [], action) {
           return undefined;
         });
         return AVAILABLELISTS;
-      } else {
-        return state;
       }
+      return state;
     }
     default:
       return state;
