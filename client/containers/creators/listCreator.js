@@ -24,53 +24,58 @@ class ListCreator extends Component {
       discipline: ' ',
       enabled: false,
       questions: [],
-      valid: false,
       resetInput: false,
+      validate: false,
     };
 
     this.setQuestion = this.setQuestion.bind(this);
     this.setTitle = this.setTitle.bind(this);
     this.setDescription = this.setDescription.bind(this);
-    this.setValid = this.setValid.bind(this);
     this.sendToDatabase = this.sendToDatabase.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.questions !== nextState.questions) {
-      return true;
-    }
-    return false;
-  }
-
+  // set the this.state.title to a title entered by the user on the text input field
   setTitle(title) {
     this.setState({ title });
   }
 
+  // set the this.state.description to a description entered by the user on the text input field
   setDescription(description) {
     this.setState({ description });
   }
 
+  // insert a new question in questions array
   setQuestion(question) {
     const questions = this.state.questions;
     questions.push(question);
     this.setState({ questions });
   }
 
-  setValid(validOrNot) {
-    this.setState({ valid: validOrNot });
+  // return true if there is any empty field
+  validateBlankFields() {
+    this.setState({ validate: true });
+    if (this.state.title !== ' ' && this.state.description !== ' ') {
+      return true;
+    }
+    return false;
   }
 
   // This function tries to send the data in state to the database
   sendToDatabase(event) {
     // The default action for the event will not be triggered.
     event.preventDefault();
+
     const EMPTY = 0;
-    const listIsValid = (this.state.valid && (this.state.questions.length !== EMPTY));
+    const fieldsAreOk = this.validateBlankFields();
+    const questionsAreOk = (this.state.questions.length !== EMPTY);
+    const listIsValid = (fieldsAreOk && questionsAreOk);
 
     // check for any question, if there is any one save the list
     if (listIsValid) {
       const title = this.state.title.trim();
-      const description = this.listDescription.value.trim();
+      const description = this.state.description.trim();
+      const closed = false;
+      const questions = this.state.questions;
       const enable = this.enable.checked;
       const disciplineSelect = document.getElementById('disciplineSelect');
       const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
@@ -79,25 +84,27 @@ class ListCreator extends Component {
         title,
         description,
         enable,
-        questions: this.state.questions,
-        discipline,
-      };
+        closed,
+        questions,
+        discipline };
 
       // Insert the list object in database through Meteor Methods
       /* global Meteor */
       Meteor.call('lists.validateAndInsert', list);
 
-      // reset the fields and the questions state
-      this.setState({ questions: [] });
+      // reset the fields and state
       this.resetListFields();
 
       console.warn('Sending to database...');
-    } else if (!this.state.valid) {
+    } else if (!fieldsAreOk) {
       // The inputs have inconsistencies
+      this.setState({ valid: true });
       console.warn('Attempt to submit incomplete or incorrect form!');
-    } else {
+    } else if (!questionsAreOk) {
     // Needed custom alert();
       console.warn('sendToDatabase: No questions were given.');
+    } else {
+      // nothing to do
     }
   }
 
@@ -121,22 +128,20 @@ class ListCreator extends Component {
         <form id="createListForm" onSubmit={this.sendToDatabase}>
           <TextInput
             id="title"
-            value={this.state.title}
-            setValid={this.setValid}
             setText={this.setTitle}
             inputLabel="Título da Lista:"
             errorMessage="Por favor, preencha o título da lista!"
             resetInput={this.state.resetInput}
+            validate={this.state.validate}
           />
 
           <TextInput
             id="description"
-            value={this.state.description}
-            setValid={this.setValid}
             setText={this.setDescription}
             inputLabel="Descrição da lista:"
             errorMessage="Por favor, preencha a descrição da lista!"
             resetInput={this.state.resetInput}
+            validate={this.state.validate}
           />
 
           <label htmlFor="disciplineLabel">Selecione a disciplina</label>

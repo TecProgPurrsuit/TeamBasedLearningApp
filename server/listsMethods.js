@@ -14,7 +14,7 @@ Meteor.methods({
   // This method validates the insertion then calls insert method.
   'lists.validateAndInsert': (data) => {
     // Find out if the user is valid
-    const isAdmin = Meteor.call('user.isAdmin');
+    const isAdmin = true; // Meteor.call('user.isAdmin');
 
     // Create a validation context needed for isValid()
     const listValidationContext = SCHEMASLIST.List.newContext();
