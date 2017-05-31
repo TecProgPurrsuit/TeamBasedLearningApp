@@ -13,7 +13,7 @@ import AlternativeCreator from './alternativeCreator';
 class QuestionCreator extends Component {
 
   static openQuestionModal() {
-    /* global $, jQuery*/
+    /* jQuery $*/
     $(document).ready(() => {
       // the data-target of .modal-trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
@@ -65,7 +65,7 @@ class QuestionCreator extends Component {
       this.props.setQuestion(question);
       this.setState({ alternatives: [] });
       this.questionDescription.value = '';
-      /* global $, jQuery*/
+      /* global $*/
       $('#questionModal').modal('close');
     }
   }
@@ -121,10 +121,8 @@ class QuestionCreator extends Component {
         <div id="questionModal" className="modal modal-fixed-footer">
           <div className="modal-content">
             <h4>Adicionar Questão</h4>
-            <form>
-              <label htmlFor="questionDescription" className="label">Descrição</label>
-              <input id="questionDescription" type="text" ref={(input) => { this.questionDescription = input; }} placeholder="Digite aqui" />
-            </form>
+            <label htmlFor="questionDescription" className="label">Descrição</label>
+            <input id="questionDescription" type="text" ref={(input) => { this.questionDescription = input; }} placeholder="Digite aqui" />
 
             <AlternativeCreator
               alternatives={this.state.alternatives}
