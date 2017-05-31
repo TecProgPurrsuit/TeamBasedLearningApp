@@ -49,7 +49,7 @@ class AlternativeCreator extends Component {
     this.alternativeDescription.value = '';
     this.setState({ correctSwitchDisabler: false });
     this.correct.checked = false;
-    /* global $, jQuery*/
+    /* global $ */
     $('.collapsible').collapsible('close', 0);
   }
 
@@ -79,37 +79,35 @@ class AlternativeCreator extends Component {
 
             <div className="collapsible-body">
 
-              <form id="alternativeForm" onSubmit={this.handleSubmit}>
-                <label htmlFor="alternativeDescription">Descrição</label>
-                <input id="alternativeDescription" type="text" ref={(input) => { this.alternativeDescription = input; }} placeholder="Digite aqui" />
-                <div>
-                  <div className="switch">
-                    <label htmlFor="correctSwitch">
-                      Incorreta
-                      <input
-                        id="correctSwitch"
-                        disabled={this.state.correctSwitchDisabler}
-                        type="checkbox"
-                        ref={(input) => { this.correct = input; }}
-                      />
-                      <span className="lever" />
-                      Correta
-                    </label>
-                    <br />
-                    <label
-                      id="correctSwitchDisabled"
-                      htmlFor="correctSwitch"
-                      hidden={!this.state.correctSwitchDisabler}
-                    >
-                        Já existe uma alternativa correta!
-                    </label>
-                  </div>
-                  <div className="right-align">
-                    <br />
-                    <button type="submit" className="waves-effect waves-light btn">Adicionar</button>
-                  </div>
+              <label htmlFor="alternativeDescription">Descrição</label>
+              <input id="alternativeDescription" type="text" ref={(input) => { this.alternativeDescription = input; }} placeholder="Digite aqui" />
+              <div>
+                <div className="switch">
+                  <label htmlFor="correctSwitch">
+                    Incorreta
+                    <input
+                      id="correctSwitch"
+                      disabled={this.state.correctSwitchDisabler}
+                      type="checkbox"
+                      ref={(input) => { this.correct = input; }}
+                    />
+                    <span className="lever" />
+                    Correta
+                  </label>
+                  <br />
+                  <label
+                    id="correctSwitchDisabled"
+                    htmlFor="correctSwitch"
+                    hidden={!this.state.correctSwitchDisabler}
+                  >
+                      Já existe uma alternativa correta!
+                  </label>
                 </div>
-              </form>
+                <div className="right-align">
+                  <br />
+                  <button onClick={this.handleSubmit} className="waves-effect waves-light btn">Adicionar</button>
+                </div>
+              </div>
 
             </div>
           </li>
