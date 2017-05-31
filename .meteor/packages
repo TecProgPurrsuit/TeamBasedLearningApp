@@ -26,3 +26,4 @@ aldeed:collection2-core
 aldeed:simple-schema
 mdg:validation-error
 check
+deanius:promise
