@@ -1,7 +1,7 @@
 /**
 * This file is responsible for rendering the create list page.
 *
-* @summary Conteiner for creating lists.
+* @summary Container for creating lists.
 *
 * @link /create-list
 * @class ListCreator
@@ -18,7 +18,8 @@ require('./style/listCreatorStyle.css');
 class ListCreator extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: ' ',
+    this.state = {
+      title: ' ',
       description: ' ',
       discipline: ' ',
       enabled: false,
@@ -64,8 +65,9 @@ class ListCreator extends Component {
     // The default action for the event will not be triggered.
     event.preventDefault();
 
+    const EMPTY = 0;
     const fieldsAreOk = this.validateBlankFields();
-    const questionsAreOk = (this.state.questions.length !== 0);
+    const questionsAreOk = (this.state.questions.length !== EMPTY);
     const listIsValid = (fieldsAreOk && questionsAreOk);
 
     // check for any question, if there is any one save the list
@@ -78,7 +80,8 @@ class ListCreator extends Component {
       const disciplineSelect = document.getElementById('disciplineSelect');
       const discipline = disciplineSelect.options[disciplineSelect.selectedIndex].value;
 
-      const list = { title,
+      const list = {
+        title,
         description,
         enable,
         closed,
@@ -106,7 +109,8 @@ class ListCreator extends Component {
   }
 
   resetListFields() {
-    this.setState({ title: ' ',
+    this.setState({
+      title: ' ',
       description: ' ',
       discipline: ' ',
       enabled: false,

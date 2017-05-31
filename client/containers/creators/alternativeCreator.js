@@ -33,12 +33,14 @@ class AlternativeCreator extends Component {
     event.preventDefault();
 
     const alternativeDescription = this.alternativeDescription.value.trim();
+    const CORRECT_ANSWER = 4;
+    const WRONG_ANSWER = 0;
 
     let alternativePoints;
     if (this.correct.checked) {
-      alternativePoints = 4;
+      alternativePoints = CORRECT_ANSWER;
     } else {
-      alternativePoints = 0;
+      alternativePoints = WRONG_ANSWER;
     }
 
     const alternative = {
