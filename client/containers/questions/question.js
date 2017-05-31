@@ -15,19 +15,24 @@ require('./style/question.css');
 class Question extends Component {
 
   renderQuestions() {
-    const questions = this.props.questionListData[0].questions;
-    return questions.map((question) => {
-      return (
-        <div className="card" key={question.description} >
-          <div className="card-content white-text" >
-            <div className="card-title">
-              {question.description}
+    const EMPTY = 0;
+    if (this.props.questionListData.length > EMPTY) {
+      const questions = this.props.questionListData[0].questions;
+      return questions.map((question) => {
+        return (
+          <div className="card" key={question.description} >
+            <div className="card-content white-text" >
+              <div className="card-title">
+                {question.description}
+              </div>
             </div>
+            <QuestionAlternatives questionAlternatives={question.alternatives} />
           </div>
-          <QuestionAlternatives questionAlternatives={question.alternatives} />
-        </div>
-      );
-    });
+        );
+      });
+    } else {
+      // do nothing
+    }
   }
 
 

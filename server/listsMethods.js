@@ -50,15 +50,8 @@ Meteor.methods({
   // This function returns all items in the database
   'lists.getAll': () => {
     // Find out if the user is valid
-    const isAdmin = Meteor.call('user.isAdmin');
-    let listData = null;
-
-    if (isAdmin) {
-      listData = LISTSDB.find().fetch();
-    } else {
-      // Do nothing - listData already null
-    }
-
+    let listData = [];
+    listData = LISTSDB.find().fetch();
     return listData;
   },
 

@@ -7,6 +7,19 @@
 export const SELECT_GROUP_ANSWERING = 'SELECT_GROUP_ANSWERING';
 export const SELECT_INDIVIDUAL_ANSWERING = 'SELECT_INDIVIDUAL_ANSWERING';
 export const CONNECT_USER = 'CONNECT_USER';
+export const FETCH_LISTS = 'FETCH_LISTS';
+/* global Meteor comes from Meteor Library*/
+
+export function fetchLists() {
+  return async function (dispatch) {
+    const LISTSDATA = await
+Meteor.callPromise('lists.getAll');
+    return dispatch({
+      type: FETCH_LISTS,
+      payload: LISTSDATA,
+    });
+  }
+}
 
 export function selectGroupAnswering() {
   const GROUP_ANSWERING = 'GroupAnswering';
