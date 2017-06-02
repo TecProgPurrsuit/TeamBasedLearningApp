@@ -1,19 +1,15 @@
-import { FETCH_LISTS } from '../actions/index';
+import { FETCH_LISTS, pushListToArray } from '../actions/index';
 
 export default function (state = [], action) {
   switch (action.type) {
     case FETCH_LISTS: {
       const AVAILABLELISTS = [];
       if (action.payload) {
-        action.payload.map((list) => {
-          if (list.enable) {
-            AVAILABLELISTS.push(list);
-          }
-          return undefined;
-        });
+        pushListToArray(action.payload, AVAILABLELISTS, true);
         return AVAILABLELISTS;
+      } else {
+        return state;
       }
-      return state;
     }
     default:
       return state;
