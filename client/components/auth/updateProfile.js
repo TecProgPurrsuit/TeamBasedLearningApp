@@ -12,7 +12,7 @@ class UpdateProfile extends Component {
     this.state = {
       message: '',
       error: false,
-      registratioUpdateProfilen_number: '',
+      registration_number: '',
       password: '',
       email: '',
       name: '',
@@ -47,22 +47,25 @@ class UpdateProfile extends Component {
       },
     };
 
-    /* global Meteor comes from Meteor library*/
     Meteor.call('userUpdate', user, (error) => {
+
       if (!error) {
-        console.log(user);
+        //Update actual user registered on Meteor with params 'user.profile'
         Meteor.users.update(Meteor.userId(), {
           $set: {
             profile : user.profile
           }
         });
+
         this.setState({ message: 'Successfully created!' });
         browserHistory.push('/');
       } else {
+
         this.setState({
           message: error.reason,
           error: true,
         });
+
         console.error(error.reason);
       }
     });
@@ -149,7 +152,6 @@ class UpdateProfile extends Component {
             autoComplete="off"
             pattern="[0-9]{9}"
             title="Matricula da UnB - 9 digitos"
-            required
           />
 
           <CustomInput
@@ -159,7 +161,6 @@ class UpdateProfile extends Component {
             className="input-field white-text validate"
             placeholder="Email"
             autoComplete="off"
-            required
           />
 
           <CustomInput
@@ -169,7 +170,6 @@ class UpdateProfile extends Component {
             className="input-field white-text"
             placeholder="Senha"
             autoComplete="off"
-            required
           />
 
           <CustomButton
