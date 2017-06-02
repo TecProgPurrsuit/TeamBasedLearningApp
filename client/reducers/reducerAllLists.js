@@ -5,8 +5,10 @@ export default function (state = [], action) {
     case FETCH_LISTS:
       if (action.payload) {
         return action.payload;
+      } else {
+        return state;
       }
-      return state;
+
     default:
       return state;
   }

@@ -8,6 +8,8 @@
     "mocha": true
   },
   "rules": {
+    "no-else-return": 0,
+    "array-callback-return": 0,
     "no-console": ["error", { allow: ["warn", "error"] }],
     "arrow-body-style": 0,
     "react/forbid-prop-types": [1, { "forbid": [<string>] }],

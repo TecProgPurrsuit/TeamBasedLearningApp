@@ -44,3 +44,14 @@ export function connectUser(user) {
     payload: currentUser,
   };
 }
+
+
+export function pushListToArray(arrayList, emptyArray, typeOfList) {
+  arrayList.map((list) => {
+    if (list.enable === typeOfList) {
+      emptyArray.push(list);
+    } else {
+      // do nothing
+    }
+  });
+}
