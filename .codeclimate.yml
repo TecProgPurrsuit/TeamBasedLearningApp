@@ -4,15 +4,14 @@ engines:
     enabled: true
   duplication:
     enabled: true
+    count_threshold: 2
     checks:
       Similar code:
-        enabled: false
+        enabled: true
     config:
       languages:
-      - ruby
-      - javascript
-      - python
-      - php
+        javascript:
+          mass_threshold: 100
   eslint:
     enabled: true
     config:
