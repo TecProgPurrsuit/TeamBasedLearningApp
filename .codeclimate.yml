@@ -4,9 +4,6 @@ engines:
     enabled: true
   duplication:
     enabled: true
-    checks:
-      Similar Code:
-        enable: false
     config:
       languages:
       - ruby
