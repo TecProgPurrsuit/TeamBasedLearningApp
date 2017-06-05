@@ -1,3 +1,11 @@
+/**
+* This file is responsible for giving user a list of list of questios, verifying
+* the user hierarchy: teacher or student.
+*
+* @summary Defining list for the user.
+*
+*/
+
 import React from 'react';
 import { connect } from 'react-redux';
 

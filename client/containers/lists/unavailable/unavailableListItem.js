@@ -1,4 +1,13 @@
+/**
+* This file is responsible for rendering the create alternatives component.
+*
+* @summary Component for creating alternatives.
+*
+* @class AlternativeCreator
+*/
+
 import React from 'react';
+import TeacherListTail from '../teacherListTail';
 
 function UnavailableListItem(props) {
   return (
@@ -11,7 +20,9 @@ function UnavailableListItem(props) {
           <div className="card-content available-card">
             <p>{props.list.description}</p>
           </div>
-          <div className="available-card-button" />
+          <div className="available-card-button">
+            <TeacherListTail list={props.list} />
+          </div>
         </div>
       </div>
       <div className="card-reveal">
