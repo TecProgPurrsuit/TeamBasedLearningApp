@@ -1,4 +1,12 @@
+/**
+* This file is responsible for show to the user the avaiable lists
+*
+* @summary All the avaiable list of questions.
+*
+*/
+
 import React, { Component } from 'react';
+import TeacherListTail from '../teacherListTail';
 
 class AvailableListItem extends Component {
 
@@ -26,6 +34,18 @@ class AvailableListItem extends Component {
       return <AvailableListItem.answeredList />;
     }
     return <AvailableListItem.unansweredList />;
+  }
+
+  static checkIfTeacher(currentUser, list) {
+      // This function return a component according to if user is teacher or student
+    if (!currentUser.profile.is_teacher) {
+      return (
+        <div>
+          {AvailableListItem.checkIfAnswered(list)};
+        </div>
+      );
+    }
+    return <TeacherListTail list={list} />;
   }
 
   static renderQuestionList(questionList) {
@@ -81,7 +101,7 @@ class AvailableListItem extends Component {
               <p>{this.props.list.description}</p>
             </div>
             <div className="available-card-button">
-              {AvailableListItem.checkIfAnswered(this.props.list)}
+              {AvailableListItem.checkIfTeacher(this.props.currentUser, this.props.list)}
             </div>
           </div>
         </div>
@@ -103,6 +123,7 @@ class AvailableListItem extends Component {
 
 AvailableListItem.propTypes = {
   list: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object.isRequired,
 };
 
 export default AvailableListItem;
