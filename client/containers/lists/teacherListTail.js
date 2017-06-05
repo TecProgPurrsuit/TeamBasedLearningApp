@@ -1,3 +1,10 @@
+/**
+* This file is responsible for giving teacher some configuration options on a List Tail.
+*
+* @summary Teacher list options.
+*
+*/
+
 import React from 'react';
 
 function TeacherListTail() {

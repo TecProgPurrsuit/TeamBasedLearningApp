@@ -1,3 +1,10 @@
+/**
+* This file is responsible for show to the user the avaiable lists
+*
+* @summary All the avaiable list of questions.
+*
+*/
+
 import React, { Component } from 'react';
 import TeacherListTail from '../teacherListTail';
 
@@ -31,7 +38,7 @@ class AvailableListItem extends Component {
 
   static checkIfTeacher(currentUser, list) {
       // This function return a component according to if user is teacher or student
-    if (currentUser.profile.is_teacher) {
+    if (!currentUser.profile.is_teacher) {
       return (
         <div>
           {AvailableListItem.checkIfAnswered(list)};
