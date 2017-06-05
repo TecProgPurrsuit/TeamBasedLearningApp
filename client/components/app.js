@@ -4,27 +4,36 @@
 * @summary Main file.
 */
 
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchLists } from '../actions/index';
 import NavBar from './navbar';
 import './app.css';
 
-function App(props) {
-  return (
-    <div>
-      <NavBar />
-      <div id="main" className="container">
-        {props.children}
+class App extends Component {
+  componentWillMount() {
+    this.props.fetchLists();
+  }
+
+  render() {
+    return (
+      <div>
+        <NavBar />
+        <div id="main" className="container">
+          {this.props.children}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 App.propTypes = {
   children: React.PropTypes.object,
+  fetchLists: React.PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
   children: null,
 };
 
-export default App;
+export default connect(null, { fetchLists })(App);

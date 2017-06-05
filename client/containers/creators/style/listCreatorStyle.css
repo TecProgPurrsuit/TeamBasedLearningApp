@@ -4,11 +4,17 @@
   text-shadow: 0.5px 0.5px 1px #000000;
 }
 
-
 #btnAddQuestion {
   background-color: white;
 }
 
 .inputForm {
   color: white;
+}
+
+.errorMessage {
+  display: none;
+  margin-top: -16px;
+  color: red;
+  font-size: 11px;
 }
