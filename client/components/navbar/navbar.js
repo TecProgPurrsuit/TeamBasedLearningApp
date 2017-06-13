@@ -24,17 +24,16 @@ class NavBar extends Component {
   }
 
   verifyIfUserIsAdmin() {
-    let adminStatus;
+    let adminStatus = false;
     if (this.props.currentUser) {
-      if(this.props.currentUser.profile.isAdmin) {
+      if (this.props.currentUser.profile.isAdmin) {
         adminStatus = true;
-      } else {
-        adminStatus = false;
       }
       return adminStatus;
     } else {
-      //do nothing
+      // do nothing
     }
+    return adminStatus;
   }
 
   verifyIfUserIsLogged() {
@@ -42,7 +41,7 @@ class NavBar extends Component {
     if (this.isAuthenticated()) {
       const welcome = `Bem vindo ${this.props.currentUser.profile.name}`;
       const adminStatus = this.verifyIfUserIsAdmin();
-      componentMenu = <LoggedUser welcome={welcome} adminStatus = {adminStatus} />;
+      componentMenu = <LoggedUser welcome={welcome} adminStatus={adminStatus} />;
     } else {
       componentMenu = <NotLoggedUser />;
     }
