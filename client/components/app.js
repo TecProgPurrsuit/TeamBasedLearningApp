@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLists } from '../actions/index';
-import NavBar from './navbar';
+import NavBar from './navbar/navbar';
 import './app.css';
 
 class App extends Component {

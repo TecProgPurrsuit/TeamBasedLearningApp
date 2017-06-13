@@ -8,6 +8,7 @@ export const SELECT_GROUP_ANSWERING = 'SELECT_GROUP_ANSWERING';
 export const SELECT_INDIVIDUAL_ANSWERING = 'SELECT_INDIVIDUAL_ANSWERING';
 export const CONNECT_USER = 'CONNECT_USER';
 export const FETCH_LISTS = 'FETCH_LISTS';
+export const ERASE_USER = 'ERASE_USER';
 /* global Meteor comes from Meteor Library*/
 
 export function fetchLists() {
@@ -41,6 +42,14 @@ export function connectUser(user) {
   const currentUser = user;
   return {
     type: CONNECT_USER,
+    payload: currentUser,
+  };
+}
+
+export function eraseUser() {
+  const currentUser = { };
+  return {
+    type: ERASE_USER,
     payload: currentUser,
   };
 }
