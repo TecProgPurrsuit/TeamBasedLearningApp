@@ -6,6 +6,18 @@ import Logout from '../auth/logout';
 
 
 class LoggedUser extends Component {
+  constructor(props) {
+    super(props);
+    this.verifyIfUserIsAdmin = this.verifyIfUserIsAdmin.bind(this);
+  }
+
+  verifyIfUserIsAdmin() {
+    let navBarItemMenu = <div />;
+    if (this.props.adminStatus) {
+      navBarItemMenu = <li><Link to="/create-list">Criar Lista</Link></li>;
+    }
+    return navBarItemMenu;
+  }
   render() {
     return (
       <div>
@@ -48,6 +60,7 @@ class LoggedUser extends Component {
             <ul className="side-nav" id="mobile-demo">
               <li><Link to="/group-simulator">Prova em grupo</Link></li>
               <li><Link to="/individual-simulator">Prova individual</Link></li>
+              this.verifyIfUserIsAdmin();
             </ul>
           </div>
         </nav>
@@ -60,6 +73,7 @@ class LoggedUser extends Component {
 }
 
 LoggedUser.propTypes = {
+  adminStatus: React.PropTypes.bool.isRequired,
   welcome: React.PropTypes.object.isRequired,
   selectGroupAnswering: React.PropTypes.func.isRequired,
   selectIndividualAnswering: React.PropTypes.func.isRequired,
