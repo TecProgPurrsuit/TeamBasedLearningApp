@@ -5,7 +5,7 @@
 */
 
 
-import { CONNECT_USER } from '../actions/index';
+import { CONNECT_USER, ERASE_USER } from '../actions/index';
 
 export default function (state = { }, action) {
   switch (action.type) {
@@ -16,6 +16,10 @@ export default function (state = { }, action) {
       } else {
         return state;
       }
+    }
+    case ERASE_USER: {
+      const USER = action.payload;
+      return USER;
     }
     default:
       return state;

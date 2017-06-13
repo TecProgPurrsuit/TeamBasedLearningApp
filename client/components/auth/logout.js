@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { connectUser } from '../../actions/index';
+import { eraseUser } from '../../actions/index';
 
 class Logout extends Component {
 /* global Meteor comes from Meteor Library */
@@ -21,7 +21,7 @@ class Logout extends Component {
     /* global Meteor comes from Meteor library*/
     Meteor.logout((error) => {
       if (!error) {
-        this.props.connectUser(Meteor.user());
+        this.props.eraseUser(Meteor.user());
         console.warn(Meteor.user());
         this.setState({ message: 'Successfully logged out!' });
         browserHistory.push('/login');
@@ -46,7 +46,7 @@ class Logout extends Component {
 }
 
 Logout.propTypes = {
-  connectUser: React.PropTypes.func,
+  eraseUser: React.PropTypes.func.isRequired,
 };
 
 Logout.defaultProps = {
@@ -59,4 +59,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { connectUser })(Logout);
+export default connect(mapStateToProps, { eraseUser })(Logout);

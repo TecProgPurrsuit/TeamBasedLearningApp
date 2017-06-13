@@ -1,37 +1,12 @@
-/**
-* This file is responsible for creating links to all pages on navbar
-*
-* @summary Navbar.
-*/
-
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { selectGroupAnswering, selectIndividualAnswering } from '../actions/index';
-import Logout from './auth/logout';
+import { connect } from 'react-redux';
+import { selectGroupAnswering, selectIndividualAnswering } from '../../actions/index';
+import Logout from '../auth/logout';
 
-class NavBar extends Component {
 
-  isAuthenticated() {
-    /* global Meteor comes from Meteor library*/
-    const userDataAvailable = (Meteor.user() !== null);
-    const loggedIn = (this.props.currentUser && userDataAvailable);
-    return loggedIn;
-  }
-
+class LoggedUser extends Component {
   render() {
-    let welcome = '';
-    let authentication = null;
-
-    // Verify that the user is logged in and return the Login or Logout button
-    if (this.isAuthenticated()) {
-      welcome = `Bem vindo ${this.props.currentUser.profile.name}`;
-      authentication = <Logout />;
-    } else {
-      welcome = '';
-      authentication = <li><Link to="/login">Login</Link></li>;
-    }
-
     return (
       <div>
         <nav className="teal darken-4">
@@ -68,7 +43,7 @@ class NavBar extends Component {
                   Listas disponíveis
                 </Link>
               </li>
-              { authentication }
+              <Logout />
             </ul>
             <ul className="side-nav" id="mobile-demo">
               <li><Link to="/group-simulator">Prova em grupo</Link></li>
@@ -77,31 +52,19 @@ class NavBar extends Component {
           </div>
         </nav>
         <div className="left white-text">
-          { welcome }
+          { this.props.welcome }
         </div>
       </div>
     );
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    currentUser: state.currentUser,
-  };
-}
-
-NavBar.propTypes = {
+LoggedUser.propTypes = {
+  welcome: React.PropTypes.object.isRequired,
   selectGroupAnswering: React.PropTypes.func.isRequired,
   selectIndividualAnswering: React.PropTypes.func.isRequired,
-  currentUser: React.PropTypes.object,
 };
-
-NavBar.defaultProps = {
-  currentUser: null,
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   { selectGroupAnswering, selectIndividualAnswering },
-)(NavBar);
+)(LoggedUser);
