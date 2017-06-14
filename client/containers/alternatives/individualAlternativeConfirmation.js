@@ -1,3 +1,11 @@
+/**
+* This file is responsible for render a individual alternative value.
+*
+* @summary Component for a individual alternative value.
+
+  @function IndividualAlternativeValue
+*/
+
 import React from 'react';
 
 function IndividualAlternativeValue() {
@@ -13,4 +21,5 @@ function IndividualAlternativeValue() {
   );
 }
 
+// Export IndividualAlternativeValue function
 export default IndividualAlternativeValue;

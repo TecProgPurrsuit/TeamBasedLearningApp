@@ -2,6 +2,7 @@
 * This file is responsible for loggout the user into the system
 *
 * @summary Loggout the user into the system.
+* @class Logout
 */
 
 import React, { Component } from 'react';
@@ -14,11 +15,13 @@ class Logout extends Component {
   constructor() {
     super();
     this.state = { message: '', error: false };
+    // Finding the input and run the authenticationLogout function
+    // ESLint requirement
     this.authenticationLogout = this.authenticationLogout.bind(this);
   }
 
   authenticationLogout() {
-    /* global Meteor comes from Meteor library*/
+    /* global Meteor comes from Meteor library */
     Meteor.logout((error) => {
       if (!error) {
         this.props.eraseUser(Meteor.user());
@@ -45,18 +48,22 @@ class Logout extends Component {
 
 }
 
-Logout.propTypes = {
-  eraseUser: React.PropTypes.func.isRequired,
-};
-
-Logout.defaultProps = {
-  connectUser: null,
-};
-
+// Get the state of currentUser from redux
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
   };
 }
 
+// Especify the eraseUser type
+Logout.propTypes = {
+  eraseUser: React.PropTypes.func.isRequired,
+};
+
+// Apply the default value on currentUser
+Logout.defaultProps = {
+  currentUser: null,
+};
+
+// Export the Logout component
 export default connect(mapStateToProps, { eraseUser })(Logout);

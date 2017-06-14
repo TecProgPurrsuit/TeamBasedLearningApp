@@ -15,6 +15,7 @@ import Login from './components/auth/login';
 import Register from './components/auth/register';
 import ListCreator from './containers/creators/listCreator';
 
+// Export all routes path of application with your respective component
 export default (
   <Route path="/" component={App}>
     <Route path="/group-simulator" component={GroupAnswer} />

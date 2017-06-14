@@ -34,8 +34,10 @@ class IndividualAlternative extends Component {
   }
 }
 
+// Especify the connectUser type
 IndividualAlternative.propTypes = {
   alternative: React.PropTypes.object.isRequired,
 };
 
+// export IndividualAlternative component
 export default IndividualAlternative;

@@ -13,6 +13,7 @@ import QuestionCreator from './questionCreator';
 import TextInput from './textInput';
 // Meteor comes from Meteor Library - No import needed (ESLINT issue)
 
+// Insert stylesheet in the component
 require('./style/listCreatorStyle.css');
 
 class ListCreator extends Component {
@@ -28,6 +29,8 @@ class ListCreator extends Component {
       validate: false,
     };
 
+    // Finding the input and run the sets and sendToDatabase function
+    // ESLint requirement
     this.setQuestion = this.setQuestion.bind(this);
     this.setTitle = this.setTitle.bind(this);
     this.setDescription = this.setDescription.bind(this);
@@ -62,8 +65,7 @@ class ListCreator extends Component {
 
   // This function tries to send the data in state to the database
   sendToDatabase(event) {
-    // The default action for the event will not be triggered.
-    event.preventDefault();
+    event.preventDefault(); // The default action for the event will not be triggered.
 
     const EMPTY = 0;
     const fieldsAreOk = this.validateBlankFields();
@@ -188,4 +190,5 @@ class ListCreator extends Component {
   }
 }
 
+// Export ListCreator Component
 export default connect()(ListCreator);

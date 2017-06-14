@@ -16,6 +16,8 @@ class TextInput extends Component {
   constructor(props) {
     super(props);
     this.state = { text_input: '' };
+    // Finding the input and run the randleInputs function
+    // ESLint requirement
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
   }
@@ -28,7 +30,7 @@ class TextInput extends Component {
     } else if (this.props.validate !== nextProps.validate && nextProps.validate === true) {
       this.validate(this.state.text_input);
     } else {
-      // nothing to do
+      // Do nothing
     }
   }
 
@@ -77,6 +79,7 @@ class TextInput extends Component {
   }
 }
 
+// Especify the connectUser type
 TextInput.propTypes = {
   setText: PropTypes.func.isRequired,
   inputLabel: PropTypes.string.isRequired,
@@ -86,4 +89,5 @@ TextInput.propTypes = {
   validate: PropTypes.bool.isRequired,
 };
 
+// Export TextInput component
 export default TextInput;

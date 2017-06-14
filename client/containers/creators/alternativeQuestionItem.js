@@ -1,3 +1,11 @@
+/**
+* This file is responsible for rendering the alternatives question itens.
+*
+* @summary Component for rendering alternatives question itens.
+*
+* @class AlternativeQuestionItem
+*/
+
 import React, { Component } from 'react';
 
 class AlternativeQuestionItem extends Component {
@@ -10,6 +18,7 @@ class AlternativeQuestionItem extends Component {
       } else {
         key = item.alternativeDescription;
       }
+
       return (
         <li key={key} className="collection-item">
           <div>
@@ -31,9 +40,11 @@ class AlternativeQuestionItem extends Component {
   }
 }
 
+// Especify the attributes type
 AlternativeQuestionItem.propTypes = {
   items: React.PropTypes.array.isRequired,
   itemName: React.PropTypes.string.isRequired,
 };
 
+// Export AlternativeQuestionItem component
 export default AlternativeQuestionItem;

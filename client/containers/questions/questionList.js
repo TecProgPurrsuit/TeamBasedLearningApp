@@ -9,7 +9,6 @@
 import React from 'react';
 import Question from './question';
 
-
 function QuestionList() {
   return (
     <div className="row">

@@ -10,10 +10,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import QuestionAlternatives from './questionAlternatives';
 
+// Insert stylesheet on components
 require('./style/question.css');
 
 class Question extends Component {
 
+  // Rendering the questions if it is not empty
   renderQuestions() {
     const EMPTY = 0;
     if (this.props.questionListData.length > EMPTY) {
@@ -30,12 +32,12 @@ class Question extends Component {
           </div>
         );
       });
+    } else {
+      return (
+        <div>Questions render error</div>
+      );
     }
-    return (
-      <div>Questions render error</div>
-    );
   }
-
 
   render() {
     return (
@@ -46,14 +48,17 @@ class Question extends Component {
   }
 }
 
+// Get the state of questionListData from redux
 function mapStateToProps(state) {
   return {
     questionListData: state.questionListData,
   };
 }
 
+// Especify the questionListData type and if it is requered on system
 Question.propTypes = {
   questionListData: React.PropTypes.array.isRequired,
 };
 
+// Export the Question component
 export default connect(mapStateToProps)(Question);

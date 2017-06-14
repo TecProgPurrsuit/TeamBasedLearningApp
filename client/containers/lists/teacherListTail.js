@@ -15,8 +15,10 @@ function TeacherListTail() {
   );
 }
 
+// Especify the list type and if it is requered on system
 TeacherListTail.propTypes = {
   list: React.PropTypes.object.isRequired,
 };
 
+// Export the TeacherListTail by default
 export default TeacherListTail;

@@ -2,6 +2,7 @@
 * This file is responsible for creating custom inputs.
 *
 * @summary Create custom inputs.
+* @function CustomInput
 */
 
 import React from 'react';
@@ -28,12 +29,15 @@ function CustomInput(props) {
   );
 }
 
+// Especify the icon type
 CustomInput.propTypes = {
   icon: React.PropTypes.string,
 };
 
+// Apply the default value on icon
 CustomInput.defaultProps = {
   icon: '',
 };
 
+// Export the CustomInput component
 export default CustomInput;

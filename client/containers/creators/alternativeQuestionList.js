@@ -1,3 +1,11 @@
+/**
+* This file is responsible for rendering the alternatives question lists.
+*
+* @summary Component for rendering alternatives question lists.
+*
+* @class AlternativeQuestionList
+*/
+
 import React, { Component } from 'react';
 import AlternativeQuestionItem from './alternativeQuestionItem';
 
@@ -9,6 +17,8 @@ class AlternativeQuestionList extends Component {
       itemName = 'Questão';
     } else if (this.props.listName === 'Alternativas') {
       itemName = 'Alternativa';
+    } else {
+      // do nothing
     }
     return itemName;
   }
@@ -28,9 +38,11 @@ class AlternativeQuestionList extends Component {
   }
 }
 
+// Especify the attributes type
 AlternativeQuestionList.propTypes = {
   listName: React.PropTypes.string.isRequired,
   items: React.PropTypes.array.isRequired,
 };
 
+// Export AlternativeQuestionList component
 export default AlternativeQuestionList;

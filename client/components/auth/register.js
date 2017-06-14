@@ -1,3 +1,10 @@
+/**
+* This file is responsible for register the user into the system
+*
+* @summary Register the user into the system.
+* @class Register
+*/
+
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import CustomInput from '../customInput';
@@ -21,7 +28,7 @@ class Register extends Component {
       classes: [],
       groups: [],
     };
-    // Finding the input and run the randleInput and handleSubmit function
+    // Finding the input and run the randleInputs and handleSubmit function
     // ESLint requirement
     this.handleInputName = this.handleInput.bind(this, 'name');
     this.handleInputGroup = this.handleInput.bind(this, 'group');
@@ -47,7 +54,7 @@ class Register extends Component {
       },
     };
 
-    /* global Meteor comes from Meteor library*/
+    /* global Meteor comes from Meteor library */
     Meteor.call('userInsert', user, (error) => {
       if (!error) {
         this.setState({ message: 'Successfully created!' });
@@ -76,6 +83,7 @@ class Register extends Component {
 
   render() {
     let messageClass = '';
+    // Apply the style on message error or message success
     if (this.state.error) {
       messageClass = 'card-panel red lighten-3';
     } else {
@@ -179,4 +187,5 @@ class Register extends Component {
   }
 }
 
+// Export register by default
 export default Register;

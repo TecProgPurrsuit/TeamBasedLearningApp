@@ -2,6 +2,7 @@
 * This file is responsible for logging the user into the system
 *
 * @summary Logging the user into the system.
+* @class Login
 */
 
 import React, { Component } from 'react';
@@ -22,7 +23,7 @@ class Login extends Component {
       password: '',
       registration_number: '',
     };
-    // Finding the input and run the randleInput and handleSubmit function
+    // Finding the input and run the randleInputs and handleSubmit function
     // ESLint requirement
     this.handleInputUser = this.handleInput.bind(this, 'registration_number');
     this.handleInputPassword = this.handleInput.bind(this, 'password');
@@ -69,6 +70,7 @@ class Login extends Component {
 
   render() {
     let messageClass = '';
+    // Apply the style on message error or message success
     if (this.state.error) {
       messageClass = 'card-panel red lighten-3';
     } else {
@@ -122,18 +124,22 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  connectUser: React.PropTypes.func,
-};
-
-Login.defaultProps = {
-  connectUser: null,
-};
-
+// Get the state of currentUser from redux
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
   };
 }
 
+// Especify the connectUser type
+Login.propTypes = {
+  connectUser: React.PropTypes.func.isRequired,
+};
+
+// Apply the default value on connectUser
+Login.defaultProps = {
+  currentUser: null,
+};
+
+// Export the Login component
 export default connect(mapStateToProps, { connectUser })(Login);
