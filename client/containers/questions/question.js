@@ -55,7 +55,7 @@ function mapStateToProps(state) {
   };
 }
 
-// Especific the questionListData type and if it is requered on system
+// Especify the questionListData type and if it is requered on system
 Question.propTypes = {
   questionListData: React.PropTypes.array.isRequired,
 };

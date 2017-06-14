@@ -88,7 +88,7 @@ function mapStateToProps(state) {
   };
 }
 
-/* Especific the questionAlternatives and typeOfAnswering type and if it
+/* Especify the questionAlternatives and typeOfAnswering type and if it
 is requered on system */
 QuestionAlternatives.propTypes = {
   questionAlternatives: React.PropTypes.array.isRequired,
