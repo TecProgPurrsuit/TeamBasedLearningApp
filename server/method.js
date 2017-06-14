@@ -1,3 +1,10 @@
+/**
+* This file is responsible for creating new user and insert it on database.
+
+* @summary Insert user on database.
+*/
+
+
 /* global Meteor */
 Meteor.methods({
 
@@ -20,7 +27,7 @@ Meteor.methods({
     const userExists = Accounts.findUserByUsername(user.username);
 
     /* Verify if user exists and return them */
-    let currentUser;
+    let currentUser = null;
     if (!userExists) {
       currentUser = Accounts.createUser(user);
     } else {

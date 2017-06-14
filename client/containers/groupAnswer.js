@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
+/**
+* This file is where the group answers is rendered.
+*
+* @summary Group answers container.
+*
+* @link /group-simulator
+* @class GroupAnswer
+*/
+
+import React from 'react';
 import QuestionList from './questions/questionList';
 
-class GroupAnswer extends Component {
-  render() {
-    return (
-      <QuestionList />
-    );
-  }
+function GroupAnswer() {
+  return (
+    <QuestionList />
+  );
 }
 
 export default GroupAnswer;

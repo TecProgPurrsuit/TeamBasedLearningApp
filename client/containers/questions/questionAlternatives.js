@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import GroupAlternative from '../alternatives/groupAlternative';
 import IndividualAlternative from '../alternatives/individualAlternative';
 
+// Insert stylesheet on components
 require('./style/question.css');
 
 class QuestionAlternatives extends Component {
@@ -51,6 +52,8 @@ class QuestionAlternatives extends Component {
         <div className="indeterminate" />
       </div>
     );
+
+    // Verify the type of answering to render group of alternatives
     if (this.props.typeOfAnswering === 'GroupAnswering') {
       typeOfAlternative = (
         <div>
@@ -63,6 +66,8 @@ class QuestionAlternatives extends Component {
           {QuestionAlternatives.renderIndividualAlternatives(questionAlternatives)}
         </div>
       );
+    } else {
+      // do nothing
     }
     return typeOfAlternative;
   }
@@ -76,15 +81,19 @@ class QuestionAlternatives extends Component {
   }
 }
 
+// Get the state of typeOfAnswering from redux
 function mapStateToProps(state) {
   return {
     typeOfAnswering: state.typeOfAnswering,
   };
 }
 
+/* Especific the questionAlternatives and typeOfAnswering type and if it
+is requered on system */
 QuestionAlternatives.propTypes = {
   questionAlternatives: React.PropTypes.array.isRequired,
   typeOfAnswering: React.PropTypes.string.isRequired,
 };
 
+// Export the QuestionAlternatives component
 export default connect(mapStateToProps)(QuestionAlternatives);
