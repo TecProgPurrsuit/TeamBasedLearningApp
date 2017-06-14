@@ -1,9 +1,9 @@
 /**
-* This file is responsible for rendering the create alternatives component.
+* This file is responsible for rendering the unavailables lists itens.
 *
-* @summary Component for creating alternatives.
+* @summary Component for render unavailable lists itens.
 *
-* @class AlternativeCreator
+* @class UnavailableListItem
 */
 
 import React from 'react';
@@ -36,8 +36,10 @@ function UnavailableListItem(props) {
   );
 }
 
+// Especify the list type and if it is requered on system
 UnavailableListItem.propTypes = {
   list: React.PropTypes.object.isRequired,
 };
 
+// Export the UnavailableListItem
 export default UnavailableListItem;

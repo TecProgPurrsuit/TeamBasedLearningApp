@@ -1,7 +1,7 @@
 /**
-* This file is responsible for show to the user the avaiable lists
+* This file is responsible for show to the user the avaiable lists itens
 *
-* @summary All the avaiable list of questions.
+* @summary All itens of avaiable list.
 *
 */
 
@@ -10,8 +10,8 @@ import TeacherListTail from '../teacherListTail';
 
 class AvailableListItem extends Component {
 
+  // This component is used in case the question list has been answered
   static answeredList() {
-    // This component is used in case the question list has been answered
     return (
       <div className="card-action">
         <a className="activator">Ver respostas certas</a>
@@ -19,8 +19,8 @@ class AvailableListItem extends Component {
     );
   }
 
-  static unansweredList() {
   // This component is used in case the question list was not answered
+  static unansweredList() {
     return (
       <div className="card-action">
         <a>Responder Questionário</a>
@@ -28,28 +28,30 @@ class AvailableListItem extends Component {
     );
   }
 
+  // This function return a component according to if it's answered or not
   static checkIfAnswered(list) {
-      // This function return a component according to if it's answered or not
     if (list.answered) {
       return <AvailableListItem.answeredList />;
+    } else {
+      return <AvailableListItem.unansweredList />;
     }
-    return <AvailableListItem.unansweredList />;
   }
 
+  // This function return a component according to if user is teacher or student
   static checkIfTeacher(currentUser, list) {
-      // This function return a component according to if user is teacher or student
-    if (!currentUser.profile.is_teacher) {
+    if (currentUser.profile.is_teacher) {
+      return <TeacherListTail list={list} />;
+    } else {
       return (
         <div>
           {AvailableListItem.checkIfAnswered(list)};
         </div>
       );
     }
-    return <TeacherListTail list={list} />;
   }
 
+  // This component is a tab with all the questions of the available list
   static renderQuestionList(questionList) {
-    // This component is a tab with all the questions of the available list
     return questionList.map((question) => {
       return (
         <div key={question.description}>
@@ -61,8 +63,8 @@ class AvailableListItem extends Component {
     });
   }
 
+  // This is a nested component that only return the answer data
   static renderAlternativeAnswer(alternatives) {
-    // This is a nested component that only return the answer data
     return alternatives.map((alternative) => {
       return (
         <a href="" className="collection-item" key={alternative.alternativeDescription}>
@@ -75,8 +77,8 @@ class AvailableListItem extends Component {
     });
   }
 
+  // This component disposes the content under the tabs
   static renderQuestionListAlternatives(questionList) {
-    // This component disposes the content under the tabs
     return questionList.map((question) => {
       return (
         <div key={question.description}>
@@ -121,9 +123,11 @@ class AvailableListItem extends Component {
   }
 }
 
+// Especify the list and currentUser type and if it is requered on system
 AvailableListItem.propTypes = {
   list: React.PropTypes.object.isRequired,
   currentUser: React.PropTypes.object.isRequired,
 };
 
+// Export the AvailableListItem component
 export default AvailableListItem;
