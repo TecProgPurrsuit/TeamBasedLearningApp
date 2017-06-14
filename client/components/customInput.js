@@ -2,6 +2,7 @@
 * This file is responsible for creating custom inputs.
 *
 * @summary Create custom inputs.
+* @function CustomInput
 */
 
 import React from 'react';

@@ -2,6 +2,7 @@
 * This file is responsible for creating links to all pages on navbar when the user is logged
 *
 * @summary Navbar when the user is logged.
+* @class LoggedUser
 */
 
 import React, { Component } from 'react';

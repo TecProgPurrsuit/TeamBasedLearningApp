@@ -2,6 +2,7 @@
 * This file is responsible for creating custom messages.
 *
 * @summary Create custom messages.
+* @class CustomMessage
 */
 
 import React from 'react';

@@ -2,6 +2,7 @@
 * This file is responsible for register the user into the system
 *
 * @summary Register the user into the system.
+* @class Register
 */
 
 import React, { Component } from 'react';

@@ -2,6 +2,7 @@
 * This file is responsible for creating custom buttons.
 *
 * @summary Create custom buttons.
+* @class CustomButton
 */
 
 import React from 'react';

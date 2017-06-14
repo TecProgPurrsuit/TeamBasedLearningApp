@@ -2,6 +2,7 @@
 * This file is responsible for loggout the user into the system
 *
 * @summary Loggout the user into the system.
+* @class Logout
 */
 
 import React, { Component } from 'react';

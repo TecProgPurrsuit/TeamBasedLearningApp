@@ -1,7 +1,8 @@
 /**
 * This file is the main of application.
 *
-* @summary Main file.
+* @summary Main file
+* @class App
 */
 
 import React, { Component } from 'react';

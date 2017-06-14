@@ -2,6 +2,7 @@
 * This file is responsible for logging the user into the system
 *
 * @summary Logging the user into the system.
+* @class Login
 */
 
 import React, { Component } from 'react';

@@ -2,6 +2,7 @@
 * This file is responsible for creating links to all pages on navbar
 *
 * @summary Navbar.
+* @class NavBar
 */
 
 import React, { Component } from 'react';
