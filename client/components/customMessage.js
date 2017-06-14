@@ -20,14 +20,17 @@ function CustomMessage(props) {
   return (<div>{divMessage}</div>);
 }
 
+// Especify the attributes type
 CustomMessage.propTypes = {
   message: React.PropTypes.string,
   className: React.PropTypes.string,
 };
 
+// Apply the default value on attributes
 CustomMessage.defaultProps = {
   message: '',
   className: '',
 };
 
+// Export the CustomMessage component
 export default CustomMessage;

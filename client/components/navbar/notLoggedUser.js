@@ -1,3 +1,9 @@
+/**
+* This file is responsible for creating links to all pages on navbar when user is not logged
+*
+* @summary Navbar when user is not logged.
+*/
+
 import React from 'react';
 import { Link } from 'react-router';
 
@@ -22,4 +28,5 @@ const notLoggedUser = () => {
   );
 };
 
+// Export notLoggedUser component
 export default notLoggedUser;

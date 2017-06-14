@@ -27,13 +27,16 @@ class App extends Component {
   }
 }
 
+// Especify the children and fetchLists type
 App.propTypes = {
   children: React.PropTypes.object,
   fetchLists: React.PropTypes.func.isRequired,
 };
 
+// Apply the default value on children
 App.defaultProps = {
   children: null,
 };
 
+// Export the App component
 export default connect(null, { fetchLists })(App);

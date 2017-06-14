@@ -28,12 +28,15 @@ function CustomInput(props) {
   );
 }
 
+// Especify the icon type
 CustomInput.propTypes = {
   icon: React.PropTypes.string,
 };
 
+// Apply the default value on icon
 CustomInput.defaultProps = {
   icon: '',
 };
 
+// Export the CustomInput component
 export default CustomInput;

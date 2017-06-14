@@ -9,12 +9,12 @@ export const SELECT_INDIVIDUAL_ANSWERING = 'SELECT_INDIVIDUAL_ANSWERING';
 export const CONNECT_USER = 'CONNECT_USER';
 export const FETCH_LISTS = 'FETCH_LISTS';
 export const ERASE_USER = 'ERASE_USER';
-/* global Meteor comes from Meteor Library*/
 
 export function fetchLists() {
   return async function (dispatch) {
     const LISTSDATA = await
-Meteor.callPromise('lists.getAll');
+    /* global Meteor comes from Meteor Library */
+    Meteor.callPromise('lists.getAll');
     return dispatch({
       type: FETCH_LISTS,
       payload: LISTSDATA,
