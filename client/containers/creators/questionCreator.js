@@ -23,21 +23,23 @@ class QuestionCreator extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = { alternatives: [] };
+
+    // Finding the input and run the randleInputs and handleSubmit function
+    // ESLint requirement
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setQuestionAlternative = this.setQuestionAlternative.bind(this);
     this.checkForAnyCorrectAlternative = this.checkForAnyCorrectAlternative.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.questions !== nextProps.questions) {
+    const isNextQuestion = this.props.questions !== nextProps.questions;
+    const isNextState = this.state.alternatives !== nextState.alternatives;
+    if (isNextQuestion || isNextState) {
       return true;
+    } else {
+      return false;
     }
-    if (this.state.alternatives !== nextState.alternatives) {
-      return true;
-    }
-    return false;
   }
 
   setQuestionAlternative(questionAlternative) {
@@ -75,6 +77,8 @@ class QuestionCreator extends Component {
     this.state.alternatives.map((alternative) => {
       if (alternative.alternativePoints > 0) {
         anyCorrect = true;
+      } else {
+        // Do nothing
       }
       return 0;
     });
@@ -144,9 +148,11 @@ class QuestionCreator extends Component {
   }
 }
 
+// Especify the attributes type
 QuestionCreator.propTypes = {
   setQuestion: PropTypes.func.isRequired,
   questions: PropTypes.array.isRequired,
 };
 
+// Export QuestionCreator component
 export default QuestionCreator;

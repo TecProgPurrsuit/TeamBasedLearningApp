@@ -12,6 +12,8 @@ class GroupAlternative extends Component {
   constructor(props) {
     super(props);
     this.state = { alternativeStyle: null, wasSelected: false };
+    // Finding the input and run the groupAnswerListener function
+    // ESLint requirement
     this.groupAnswerListener = this.groupAnswerListener.bind(this);
   }
 
@@ -57,7 +59,10 @@ class GroupAlternative extends Component {
   }
 }
 
+// Especify the attributes type
 GroupAlternative.propTypes = {
   alternative: React.PropTypes.object.isRequired,
 };
+
+// Export GroupAlternative Component
 export default GroupAlternative;

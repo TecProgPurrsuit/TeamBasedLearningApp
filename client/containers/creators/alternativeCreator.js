@@ -14,6 +14,8 @@ class AlternativeCreator extends Component {
   constructor(props) {
     super(props);
     this.state = { correctSwitchDisabler: false };
+    // Finding the input and run the randleInputs and handleSubmit function
+    // ESLint requirement
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -30,7 +32,7 @@ class AlternativeCreator extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevents the browser from reloading the page
 
     const alternativeDescription = this.alternativeDescription.value.trim();
     const CORRECT_ANSWER = 4;
@@ -126,10 +128,12 @@ class AlternativeCreator extends Component {
   }
 }
 
+// Especify the attributes type
 AlternativeCreator.propTypes = {
   setQuestionAlternative: PropTypes.func.isRequired,
   alternatives: PropTypes.array.isRequired,
   checkForAnyCorrectAlternative: PropTypes.func.isRequired,
 };
 
+// Export AlternativeCreator component
 export default AlternativeCreator;
